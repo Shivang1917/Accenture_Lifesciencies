@@ -193,6 +193,7 @@ productState:
     enforceSchema: true
     enforceSchemaMethod: Warning
     catalogType: postgres
+    connection: S3 Connection - Lifesciences
   refreshInterval: 30 5 * * *
 transformation:
   - isDynamic: true
