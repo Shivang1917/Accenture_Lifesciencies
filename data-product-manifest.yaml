@@ -7,18 +7,6 @@ alias: loading_Global_Supply_Chain_And_Manufacturing_Quality_Data_in_iceberg
 discoveryPort:
   name: Global Supply Chain And Manufacturing Quality
 inputPorts:
-  - alias: Global_Supply_Chain_And_Manufacturing_Quality_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/DP_MFG_002_MANUFACTURING_QUALITY.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:1fe2d30e-49a3-4a36-a51a-974de4430bb3
-    type: inputDelimited
   - alias: BATCH_RECORDS_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_BATCH_RECORDS.csv
@@ -54,6 +42,18 @@ inputPorts:
       enforceSchema: false
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:ad7cb93d-993c-4e88-a634-33a0601bc691
+    type: inputDelimited
+  - alias: Supply_Chain_Master_Data_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/DP_MFG_002_MANUFACTURING_QUALITY.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:1fe2d30e-49a3-4a36-a51a-974de4430bb3
     type: inputDelimited
 productState:
   isDynamic: true
@@ -224,14 +224,14 @@ transformation:
     description: Transforming Global Supply Chain And Manufacturing Quality
     sequence: 5
     inputDataFrameList:
-      - inputDataFrame: Global_Supply_Chain_And_Manufacturing_Quality_1
-        tempViewName: TBL4
       - inputDataFrame: BATCH_RECORDS_1
         tempViewName: TBL1
       - inputDataFrame: QUALITY_EVENTS_1
         tempViewName: TBL2
       - inputDataFrame: EQUIPMENT_OEE_1
         tempViewName: TBL3
+      - inputDataFrame: Supply_Chain_Master_Data_1
+        tempViewName: TBL4
     query: SELECT BATCH_ID, PRODUCT_NAME, MANUFACTURING_SITE, BATCH_SIZE,
       BATCH_SIZE_UOM, BATCH_START, BATCH_END, YIELD_PERCENT, BATCH_STATUS,
       GMP_COMPLIANT, DEVIATION_COUNT, RELEASE_DATE, EXPIRY_DATE, EQUIPMENT_ID,
