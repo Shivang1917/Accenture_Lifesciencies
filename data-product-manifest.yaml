@@ -210,7 +210,7 @@ productState:
 transformation:
   - isDynamic: true
     alias: Transform
-    description: Transforming R&D Pipeline And Biologics Research
+    description: Transforming RND Pipeline And Biologics Research
     sequence: 5
     inputDataFrameList:
       - inputDataFrame: RND_Pipeline_And_Biologics_Research_1
