@@ -7,18 +7,6 @@ alias: loading_Biosimilar_Clinical_And_Regulatory_Intelligence_Product_data_in_i
 discoveryPort:
   name: Biosimilar Clinical And Regulatory Intelligence Product
 inputPorts:
-  - alias: Biosimilar_Clinical_And_Regulatory_Intelligence_Product_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/DP_BIO_001_BIOSIMILAR_REGULATORY_INTEL.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:b0f6c05f-166d-4b61-8973-8a8c83788826
-    type: inputDelimited
   - alias: CLINICAL_TRIALS_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_CLINICAL_TRIALS.csv
@@ -54,6 +42,18 @@ inputPorts:
       enforceSchema: false
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:8edd0785-ba33-48d2-9f3a-602462054495
+    type: inputDelimited
+  - alias: Regulatory_Intelligence_LKP_TBL_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/DP_BIO_001_BIOSIMILAR_REGULATORY_INTEL.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:b0f6c05f-166d-4b61-8973-8a8c83788826
     type: inputDelimited
 productState:
   isDynamic: true
@@ -197,14 +197,14 @@ transformation:
     description: Transform Data Biosimilar Clinical And Regulatory Intelligence Product
     sequence: 5
     inputDataFrameList:
-      - inputDataFrame: Biosimilar_Clinical_And_Regulatory_Intelligence_Product_1
-        tempViewName: TBL4
       - inputDataFrame: CLINICAL_TRIALS_1
         tempViewName: TBL1
       - inputDataFrame: REGULATORY_SUBMISSIONS_1
         tempViewName: TBL2
       - inputDataFrame: SAFETY_SIGNALS_1
         tempViewName: TBL3
+      - inputDataFrame: Regulatory_Intelligence_LKP_TBL_1
+        tempViewName: TBL4
     query: SELECT PRODUCT_NAME, THERAPEUTIC_AREA, TRIAL_ID, TRIAL_NAME, PHASE,
       TRIAL_STATUS, ENROLLMENT_TARGET, ENROLLMENT_ACTUAL, ENROLLMENT_RATE_PCT,
       COUNTRY, REGULATORY_BODY, SUBMISSION_ID, SUBMISSION_TYPE, SUBMISSION_DATE,
