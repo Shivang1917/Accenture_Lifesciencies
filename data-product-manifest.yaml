@@ -7,18 +7,6 @@ alias: loading_RND_Pipeline_And_Biologics_Research_data_in_iceberg
 discoveryPort:
   name: R&D Pipeline And Biologics Research
 inputPorts:
-  - alias: RND_Pipeline_And_Biologics_Research_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/DP_RND_004_PIPELINE_RESEARCH.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:b2098299-bc41-49d0-9bb5-3293fe9821fc
-    type: inputDelimited
   - alias: IND_FILINGS_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_IND_FILINGS.csv
@@ -54,6 +42,18 @@ inputPorts:
       enforceSchema: false
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:8a65281e-f66d-4c77-8829-e10fb935fb95
+    type: inputDelimited
+  - alias: Biologics_Research_Lookup_TBL_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/DP_RND_004_PIPELINE_RESEARCH.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:b2098299-bc41-49d0-9bb5-3293fe9821fc
     type: inputDelimited
 productState:
   isDynamic: true
@@ -213,14 +213,14 @@ transformation:
     description: Transforming RND Pipeline And Biologics Research
     sequence: 5
     inputDataFrameList:
-      - inputDataFrame: RND_Pipeline_And_Biologics_Research_1
-        tempViewName: TBL4
       - inputDataFrame: RND_PIPELINE_1
         tempViewName: TBL1
       - inputDataFrame: TRANSLATIONAL_RESEARCH_1
         tempViewName: TBL2
       - inputDataFrame: IND_FILINGS_1
         tempViewName: TBL3
+      - inputDataFrame: Biologics_Research_Lookup_TBL_1
+        tempViewName: TBL4
     query: SELECT PROGRAM_ID, PROGRAM_NAME, PRODUCT_NAME, MOLECULE_TYPE,
       THERAPEUTIC_AREA, INDICATION, PHASE, PROGRAM_STATUS, START_DATE,
       EXPECTED_COMPLETION, BUDGET_USD, SPEND_TO_DATE_USD,
