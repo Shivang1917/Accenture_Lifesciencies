@@ -1,0 +1,221 @@
+jobId: "1088"
+jobName: Global Commercial Market Access
+jobType: Source Aligned Data Product
+developerId: 42825798-b98f-41c3-954a-c0722b747faf
+domain: lifesciences
+alias: Load_Global_Commercial_Market_Access_data_in_iceberg
+discoveryPort:
+  name: Global Commercial Market Access
+inputPorts:
+  - alias: Global_Commercial_Market_Access_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/DP_COM_003_COMMERCIAL_MARKET_ACCESS.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:cbabd066-9591-4dd2-8586-47f0e118fcd8
+    type: inputDelimited
+  - alias: SALES_DATA_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/STG_SALES_DATA.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:4f46aef6-4976-4d53-ad04-8b47881cec5d
+    type: inputDelimited
+  - alias: MARKET_ACCESS_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/STG_MARKET_ACCESS.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:70b942d4-730b-4a02-9c47-0fe46e9dac65
+    type: inputDelimited
+  - alias: PAYER_CONTRACTS_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/STG_PAYER_CONTRACTS.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:08d35f50-a998-4ff5-9fbd-ad11ffdc2166
+    type: inputDelimited
+productState:
+  isDynamic: true
+  alias: Load_Global_Commercial_Market_Access_data_in_iceberg
+  retentionVersions: ""
+  logicalSchema:
+    properties:
+      SALE_ID:
+        type: STRING
+        description: Unique identifier for the sales transaction
+        sourceColumn: SALE_ID
+        sourceTable: STG_SALES_DATA
+      PRODUCT_NAME:
+        type: STRING
+        description: Name of the product sold
+        sourceColumn: PRODUCT_NAME
+        sourceTable: STG_SALES_DATA
+      THERAPEUTIC_AREA:
+        type: STRING
+        description: Therapeutic area of the product (e.g., Immunology, Oncology)
+        sourceColumn: THERAPEUTIC_AREA
+        sourceTable: STG_SALES_DATA
+      MARKET:
+        type: STRING
+        description: Market segment (e.g., US Branded, EU, Emerging Markets)
+        sourceColumn: MARKET
+        sourceTable: STG_SALES_DATA
+      COUNTRY:
+        type: STRING
+        description: Country where the sale occurred
+        sourceColumn: COUNTRY
+        sourceTable: STG_SALES_DATA
+      CHANNEL:
+        type: STRING
+        description: Sales channel (e.g., Hospital, Retail, Specialty)
+        sourceColumn: CHANNEL
+        sourceTable: STG_SALES_DATA
+      SALE_DATE:
+        type: STRING
+        description: Date of the sales transaction
+        sourceColumn: SALE_DATE
+        sourceTable: STG_SALES_DATA
+      QUANTITY:
+        type: STRING
+        description: Number of units sold in the transaction
+        sourceColumn: QUANTITY
+        sourceTable: STG_SALES_DATA
+      REVENUE_USD:
+        type: STRING
+        description: Gross revenue amount in USD for the transaction
+        sourceColumn: REVENUE_USD
+        sourceTable: STG_SALES_DATA
+      NET_PRICE_USD:
+        type: STRING
+        description: Net price per unit in USD after adjustments
+        sourceColumn: NET_PRICE_USD
+        sourceTable: STG_SALES_DATA
+      PAYER_TYPE:
+        type: STRING
+        description: Type of payer (e.g., Commercial, Medicare, Statutory)
+        sourceColumn: PAYER_TYPE
+        sourceTable: STG_SALES_DATA
+      FORMULARY_STATUS:
+        type: STRING
+        description: Formulary listing status (e.g., Preferred, Reimbursed, Formulary)
+        sourceColumn: FORMULARY_STATUS
+        sourceTable: STG_SALES_DATA
+      COVERAGE_STATUS:
+        type: STRING
+        description: Insurance coverage status (e.g., Covered, Not Covered)
+        sourceColumn: COVERAGE_STATUS
+        sourceTable: STG_MARKET_ACCESS
+      FORMULARY_TIER:
+        type: STRING
+        description: Formulary tier placement (e.g., Tier 2, Specialty, Hospital Only)
+        sourceColumn: FORMULARY_TIER
+        sourceTable: STG_MARKET_ACCESS
+      REIMBURSEMENT_RATE:
+        type: STRING
+        description: Payer reimbursement rate as a decimal (e.g., 0.80 = 80%)
+        sourceColumn: REIMBURSEMENT_RATE
+        sourceTable: STG_MARKET_ACCESS
+      HTA_OUTCOME:
+        type: STRING
+        description: Health Technology Assessment outcome (e.g., Positive, ASMR V)
+        sourceColumn: HTA_OUTCOME
+        sourceTable: STG_MARKET_ACCESS
+      LIST_PRICE_USD:
+        type: STRING
+        description: List price per unit in USD from market access records
+        sourceColumn: PRICE_PER_UNIT_USD
+        sourceTable: STG_MARKET_ACCESS
+      CONTRACT_ID:
+        type: STRING
+        description: Unique identifier for the payer contract
+        sourceColumn: CONTRACT_ID
+        sourceTable: STG_PAYER_CONTRACTS
+      CONTRACT_TYPE:
+        type: STRING
+        description: Type of contract (e.g., Managed Care, PBM, Statutory)
+        sourceColumn: CONTRACT_TYPE
+        sourceTable: STG_PAYER_CONTRACTS
+      DISCOUNT_PERCENT:
+        type: STRING
+        description: Contractual discount percentage applied to list price
+        sourceColumn: DISCOUNT_PERCENT
+        sourceTable: STG_PAYER_CONTRACTS
+      REBATE_PERCENT:
+        type: STRING
+        description: Contractual rebate percentage paid back to payer
+        sourceColumn: REBATE_PERCENT
+        sourceTable: STG_PAYER_CONTRACTS
+      CONTRACT_STATUS:
+        type: STRING
+        description: Current contract status (Active, Expired, Pending)
+        sourceColumn: STATUS
+        sourceTable: STG_PAYER_CONTRACTS
+      ANNUAL_VOLUME_COMMITMENT:
+        type: STRING
+        description: Committed annual volume of units under the contract
+        sourceColumn: ANNUAL_VOLUME_COMMITMENT
+        sourceTable: STG_PAYER_CONTRACTS
+      NET_REVENUE_AFTER_DISCOUNT:
+        type: STRING
+        description: "Derived net revenue: REVENUE_USD (1 - DISCOUNT_PERCENT / 100)"
+        sourceColumn: Calculated Column
+        sourceTable: Calculated Column
+  stateStoreType: loadDataIceberg
+  isProfilingEnabled: false
+  updateStrategy: Overwrite
+  tableName: iceberg_meta.Global_Commercial_Market_Access
+  warehousePath: s3a://dataverse/testbed_load/
+  catalogName: postgres_catalog
+  optional:
+    persistDataFrame: false
+    enableDataReconciliation: false
+    enforceSchema: true
+    enforceSchemaMethod: Warning
+    catalogType: postgres
+  refreshInterval: 30 5 * * *
+transformation:
+  - isDynamic: true
+    alias: Transform
+    description: Transforming Global Commercial Market Access data
+    sequence: 5
+    inputDataFrameList:
+      - inputDataFrame: Global_Commercial_Market_Access_1
+        tempViewName: TBL4
+      - inputDataFrame: SALES_DATA_1
+        tempViewName: TBL1
+      - inputDataFrame: PAYER_CONTRACTS_1
+        tempViewName: TBL2
+      - inputDataFrame: MARKET_ACCESS_1
+        tempViewName: TBL3
+    query: SELECT SALE_ID, PRODUCT_NAME, THERAPEUTIC_AREA, MARKET, COUNTRY, CHANNEL,
+      SALE_DATE, QUANTITY, REVENUE_USD, NET_PRICE_USD, PAYER_TYPE,
+      FORMULARY_STATUS, COVERAGE_STATUS, FORMULARY_TIER, REIMBURSEMENT_RATE,
+      HTA_OUTCOME, LIST_PRICE_USD, CONTRACT_ID, CONTRACT_TYPE, DISCOUNT_PERCENT,
+      REBATE_PERCENT, CONTRACT_STATUS, ANNUAL_VOLUME_COMMITMENT,
+      NET_REVENUE_AFTER_DISCOUNT FROM TBL4;
+    optional:
+      persistDataFrame: false
+    type: operationThroughSqlQuery
+controlPort:
+  dataQualityRules: {}
