@@ -2,23 +2,11 @@ jobId: "1088"
 jobName: Global Commercial Market Access
 jobType: Source Aligned Data Product
 developerId: 42825798-b98f-41c3-954a-c0722b747faf
-domain: lifesciences
+domain: sales
 alias: Load_Global_Commercial_Market_Access_data_in_iceberg
 discoveryPort:
   name: Global Commercial Market Access
 inputPorts:
-  - alias: Global_Commercial_Market_Access_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/DP_COM_003_COMMERCIAL_MARKET_ACCESS.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:cbabd066-9591-4dd2-8586-47f0e118fcd8
-    type: inputDelimited
   - alias: SALES_DATA_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_SALES_DATA.csv
@@ -54,6 +42,18 @@ inputPorts:
       enforceSchema: false
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:08d35f50-a998-4ff5-9fbd-ad11ffdc2166
+    type: inputDelimited
+  - alias: Global_Market_Access_Master_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/DP_COM_003_COMMERCIAL_MARKET_ACCESS.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:cbabd066-9591-4dd2-8586-47f0e118fcd8
     type: inputDelimited
 productState:
   isDynamic: true
@@ -200,14 +200,14 @@ transformation:
     description: Transforming Global Commercial Market Access data
     sequence: 5
     inputDataFrameList:
-      - inputDataFrame: Global_Commercial_Market_Access_1
-        tempViewName: TBL4
       - inputDataFrame: SALES_DATA_1
         tempViewName: TBL1
       - inputDataFrame: PAYER_CONTRACTS_1
         tempViewName: TBL2
       - inputDataFrame: MARKET_ACCESS_1
         tempViewName: TBL3
+      - inputDataFrame: Global_Market_Access_Master_1
+        tempViewName: TBL4
     query: SELECT SALE_ID, PRODUCT_NAME, THERAPEUTIC_AREA, MARKET, COUNTRY, CHANNEL,
       SALE_DATE, QUANTITY, REVENUE_USD, NET_PRICE_USD, PAYER_TYPE,
       FORMULARY_STATUS, COVERAGE_STATUS, FORMULARY_TIER, REIMBURSEMENT_RATE,
