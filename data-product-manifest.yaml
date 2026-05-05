@@ -3,7 +3,7 @@ jobName: R&D Pipeline And Biologics Research
 jobType: Source Aligned Data Product
 developerId: 42825798-b98f-41c3-954a-c0722b747faf
 domain: lifesciences
-alias: loading_R&D_Pipeline_And_Biologics_Research_data_in_iceberg
+alias: loading_RND_Pipeline_And_Biologics_Research_data_in_iceberg
 discoveryPort:
   name: R&D Pipeline And Biologics Research
 inputPorts:
@@ -57,7 +57,7 @@ inputPorts:
     type: inputDelimited
 productState:
   isDynamic: true
-  alias: loading_R&D_Pipeline_And_Biologics_Research_data_in_iceberg
+  alias: loading_RND_Pipeline_And_Biologics_Research_data_in_iceberg
   retentionVersions: ""
   logicalSchema:
     properties:
