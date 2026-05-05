@@ -7,18 +7,6 @@ alias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
 discoveryPort:
   name: Pharma Covigilance and Patient Safety Product
 inputPorts:
-  - alias: Pharma_Covigilance_and_Patient_Safety_Product_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/DP_PV_005_PHARMACOVIGILANCE.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:35348628-02be-430d-adf2-e64d6f51ec49
-    type: inputDelimited
   - alias: SAFETY_CASES_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_SAFETY_CASES.csv
@@ -54,6 +42,18 @@ inputPorts:
       enforceSchema: false
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:b0274ab3-651e-470e-a5c7-c9ba6464902b
+    type: inputDelimited
+  - alias: ICSR_LKP_TBL_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/DP_PV_005_PHARMACOVIGILANCE.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:35348628-02be-430d-adf2-e64d6f51ec49
     type: inputDelimited
 productState:
   isDynamic: true
@@ -245,14 +245,14 @@ transformation:
     description: Transform Data for Pharma Covigilance and Patient Safety Product
     sequence: 5
     inputDataFrameList:
-      - inputDataFrame: Pharma_Covigilance_and_Patient_Safety_Product_1
-        tempViewName: TBL4
       - inputDataFrame: ICSR_REPORTS_1
         tempViewName: TBL1
       - inputDataFrame: SAFETY_CASES_1
         tempViewName: TBL2
       - inputDataFrame: PSUR_REPORTS_1
         tempViewName: TBL3
+      - inputDataFrame: ICSR_LKP_TBL_1
+        tempViewName: TBL4
     query: SELECT CASE_ID, CASE_NUMBER, PRODUCT_NAME, EVENT_TYPE, SERIOUSNESS,
       SERIOUSNESS_CRITERIA, OUTCOME, REPORTER_TYPE, COUNTRY_OF_OCCURRENCE,
       RECEIPT_DATE, ONSET_DATE, REPORT_TYPE, CAUSALITY_ASSESSMENT, MED_DRA_PT,
