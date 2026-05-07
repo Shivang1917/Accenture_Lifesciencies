@@ -2,7 +2,7 @@ jobId: "1097"
 jobName: Healthcare Professional 360
 jobType: Aggregated Data Product
 developerId: 42825798-b98f-41c3-954a-c0722b747faf
-domain: lifesciences
+domain: sales
 alias: Load_Healthcare_Professional_360_data_in_iceberg
 discoveryPort:
   name: Healthcare Professional 360
@@ -19,9 +19,9 @@ inputPorts:
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:f052dab6-1e76-47bd-bfe6-619bc05a657f
     type: inputDelimited
-  - alias: MARKET_ACCESS_1
+  - alias: Safety_Cases_1
     isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_MARKET_ACCESS.csv
+    path: s3a://dataverse/testbed/bioc/STG_SAFETY_CASES.csv
     optional:
       persistDataFrame: false
       advanceOptions:
@@ -29,11 +29,11 @@ inputPorts:
       enableDataReconciliation: false
       enforceSchema: false
       connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:70b942d4-730b-4a02-9c47-0fe46e9dac65
+      dataSetUrn: urn:dv:dataset:1e8e13d2-eb36-4f42-8db8-5eb7d8afbeaa
     type: inputDelimited
-  - alias: Hcp_Engagements_1
+  - alias: Sales_Data_1
     isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_HCP_ENGAGEMENTS.csv
+    path: s3a://dataverse/testbed/bioc/STG_SALES_DATA.csv
     optional:
       persistDataFrame: false
       advanceOptions:
@@ -41,7 +41,7 @@ inputPorts:
       enableDataReconciliation: false
       enforceSchema: false
       connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:2ed60348-434a-4121-a181-b1fc2b4f4266
+      dataSetUrn: urn:dv:dataset:4f46aef6-4976-4d53-ad04-8b47881cec5d
     type: inputDelimited
   - alias: Hcp_Master_1
     isDynamic: true
@@ -55,7 +55,19 @@ inputPorts:
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:d71457fd-61e9-4a49-bdcd-7e8c57927455
     type: inputDelimited
-  - alias: REGULATORY_SUBMISSIONS_1
+  - alias: Hcp_Engagements_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/STG_HCP_ENGAGEMENTS.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:2ed60348-434a-4121-a181-b1fc2b4f4266
+    type: inputDelimited
+  - alias: Regulatory_Submissions_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_REGULATORY_SUBMISSIONS.csv
     optional:
@@ -67,9 +79,9 @@ inputPorts:
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:9c650f0f-b879-417e-bc4f-0f015a07ebf8
     type: inputDelimited
-  - alias: SAFETY_CASES_1
+  - alias: Market_Access_1
     isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_SAFETY_CASES.csv
+    path: s3a://dataverse/testbed/bioc/STG_MARKET_ACCESS.csv
     optional:
       persistDataFrame: false
       advanceOptions:
@@ -77,31 +89,7 @@ inputPorts:
       enableDataReconciliation: false
       enforceSchema: false
       connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:1e8e13d2-eb36-4f42-8db8-5eb7d8afbeaa
-    type: inputDelimited
-  - alias: SALES_DATA_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_SALES_DATA.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:4f46aef6-4976-4d53-ad04-8b47881cec5d
-    type: inputDelimited
-  - alias: HCP_Lookup_Tbl_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/ADP_HCP_Healthcare_Professional_360.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:5b43b5e7-9635-455d-975a-7dfca133d683
+      dataSetUrn: urn:dv:dataset:70b942d4-730b-4a02-9c47-0fe46e9dac65
     type: inputDelimited
   - alias: Pharma_Covigilance_and_Patient_Safety_Product_1
     isDynamic: true
@@ -121,112 +109,112 @@ productState:
         type: STRING
         description: Unique healthcare professional identifier; primary aggregation key
         sourceColumn: HCP_ID
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       HCP_NAME:
         type: STRING
         description: Full name of the healthcare professional
         sourceColumn: HCP_NAME
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       SPECIALTY:
         type: STRING
         description: Medical specialty (e.g., Rheumatology, Oncology, Endocrinology)
         sourceColumn: SPECIALTY
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       SUB_SPECIALTY:
         type: STRING
         description: Sub-specialty focus (e.g., Breast Cancer, Diabetes Management)
         sourceColumn: SUB_SPECIALTY
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       PRACTICE_SETTING:
         type: STRING
         description: Practice type (e.g., Hospital, Academic Medical Center)
         sourceColumn: PRACTICE_SETTING
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       AFFILIATION:
         type: STRING
         description: Institutional affiliation (e.g., Johns Hopkins Medicine, AIIMS Delhi)
         sourceColumn: AFFILIATION
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       TERRITORY:
         type: STRING
         description: Sales territory assignment (e.g., US-Northeast, IN-North)
         sourceColumn: TERRITORY
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       REGION:
         type: STRING
         description: Geographic region (e.g., North America, Europe, Asia Pacific)
         sourceColumn: REGION
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       COUNTRY:
         type: STRING
         description: Country where the HCP practices
         sourceColumn: COUNTRY
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       KOL_TIER:
         type: STRING
         description: Key Opinion Leader tier classification (Tier 1, Tier 2, Tier 3)
         sourceColumn: KOL_TIER
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       PRESCRIBER_SEGMENT:
         type: STRING
         description: Prescribing volume segment (High Volume, Mid Volume, Low Volume)
         sourceColumn: PRESCRIBER_SEGMENT
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       NPI_NUMBER:
         type: STRING
         description: National Provider Identifier number (US-based HCPs)
         sourceColumn: NPI_NUMBER
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       YEARS_IN_PRACTICE:
         type: STRING
         description: Number of years the HCP has been in active practice
         sourceColumn: YEARS_IN_PRACTICE
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       PRIMARY_THERAPEUTIC_AREA:
         type: STRING
         description: Primary therapeutic area of focus for the HCP
         sourceColumn: PRIMARY_THERAPEUTIC_AREA
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       BIOSIMILAR_ADOPTION_SCORE:
         type: STRING
         description: Propensity score indicating HCP readiness to adopt biosimilars (0-100)
         sourceColumn: BIOSIMILAR_ADOPTION_SCORE
-        sourceTable: STG_HCP_MASTER
+        sourceTable: HCP_MASTER
       PRODUCT_NAME:
         type: STRING
         description: Name of the biosimilar product prescribed/sold via this HCP
         sourceColumn: PRODUCT_NAME
-        sourceTable: STG_SALES_DATA
+        sourceTable: SALES_DATA
       BRAND_NAME:
         type: STRING
         description: Commercial brand name of the biosimilar product
         sourceColumn: BRAND_NAME
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       THERAPEUTIC_AREA:
         type: STRING
         description: Therapeutic area of the product sold
         sourceColumn: THERAPEUTIC_AREA
-        sourceTable: STG_SALES_DATA
+        sourceTable: SALES_DATA
       CHANNEL:
         type: STRING
         description: Sales channel (e.g., Hospital, Retail, Specialty)
         sourceColumn: CHANNEL
-        sourceTable: STG_SALES_DATA
+        sourceTable: SALES_DATA
       TOTAL_UNITS_SOLD:
         type: STRING
         description: "Total units sold via this HCP: SUM(QUANTITY)"
         sourceColumn: QUANTITY
-        sourceTable: STG_SALES_DATA
+        sourceTable: SALES_DATA
       TOTAL_REVENUE_USD:
         type: STRING
         description: "Total revenue attributed to this HCP: SUM(REVENUE_USD)"
         sourceColumn: REVENUE_USD
-        sourceTable: STG_SALES_DATA
+        sourceTable: SALES_DATA
       AVG_NET_PRICE_USD:
         type: STRING
         description: "Average net price per unit: AVG(NET_PRICE_USD)"
         sourceColumn: NET_PRICE_USD
-        sourceTable: STG_SALES_DATA
+        sourceTable: SALES_DATA
       PAYER_DIVERSITY:
         type: STRING
         description: "Number of distinct payer types: COUNT(DISTINCT PAYER_TYPE)"
@@ -236,42 +224,42 @@ productState:
         type: STRING
         description: Formulary listing status for the product
         sourceColumn: FORMULARY_STATUS
-        sourceTable: STG_SALES_DATA
+        sourceTable: SALES_DATA
       PAYER_NAME:
         type: STRING
         description: Name of the payer organization
         sourceColumn: PAYER_NAME
-        sourceTable: STG_MARKET_ACCESS
+        sourceTable: MARKET_ACCESS
       PAYER_TYPE:
         type: STRING
         description: Type of payer (e.g., Commercial, Medicare, Statutory, HTA Body)
         sourceColumn: PAYER_TYPE
-        sourceTable: STG_MARKET_ACCESS
+        sourceTable: MARKET_ACCESS
       COVERAGE_STATUS:
         type: STRING
         description: Insurance coverage status (Covered, Not Covered, Price Controlled)
         sourceColumn: COVERAGE_STATUS
-        sourceTable: STG_MARKET_ACCESS
+        sourceTable: MARKET_ACCESS
       FORMULARY_TIER:
         type: STRING
         description: Formulary tier placement (Tier 2, Specialty, No Tier)
         sourceColumn: FORMULARY_TIER
-        sourceTable: STG_MARKET_ACCESS
+        sourceTable: MARKET_ACCESS
       REIMBURSEMENT_RATE:
         type: STRING
         description: Payer reimbursement rate as decimal (e.g., 0.90 = 90%)
         sourceColumn: REIMBURSEMENT_RATE
-        sourceTable: STG_MARKET_ACCESS
+        sourceTable: MARKET_ACCESS
       HTA_OUTCOME:
         type: STRING
         description: Health Technology Assessment outcome
         sourceColumn: HTA_OUTCOME
-        sourceTable: STG_MARKET_ACCESS
+        sourceTable: MARKET_ACCESS
       LIST_PRICE_USD:
         type: STRING
         description: List price per unit in USD
         sourceColumn: PRICE_PER_UNIT_USD
-        sourceTable: STG_MARKET_ACCESS
+        sourceTable: MARKET_ACCESS
       PRICE_DISCOUNT_PCT:
         type: STRING
         description: "Price discount: (1 - AVG_NET_PRICE / LIST_PRICE) 100"
@@ -281,23 +269,23 @@ productState:
         type: STRING
         description: "Total AE cases reported by this HCP: COUNT(DISTINCT CASE_ID)"
         sourceColumn: CASE_ID
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       SERIOUS_AE_COUNT:
         type: STRING
         description: "Serious AE cases: COUNT(*) WHERE SERIOUSNESS = 'Serious'"
         sourceColumn: SERIOUSNESS
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       NON_SERIOUS_AE_COUNT:
         type: STRING
         description: "Non-serious AE cases: COUNT(*) WHERE SERIOUSNESS = 'Non-Serious'"
         sourceColumn: SERIOUSNESS
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       PROBABLE_CAUSALITY_COUNT:
         type: STRING
         description: "Cases with probable causality: COUNT(*) WHERE CAUSALITY_ASSESSMENT
           = 'Probable'"
         sourceColumn: CAUSALITY_ASSESSMENT
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       SERIOUS_AE_RATE_PCT:
         type: STRING
         description: "Serious AE rate: SERIOUS_AE_COUNT / TOTAL_AE_CASES_REPORTED 100"
@@ -307,40 +295,40 @@ productState:
         type: STRING
         description: "Total engagements: COUNT(DISTINCT ENGAGEMENT_ID)"
         sourceColumn: ENGAGEMENT_ID
-        sourceTable: STG_HCP_ENGAGEMENTS
+        sourceTable: HCP_ENGAGEMENTS
       MSL_VISITS:
         type: STRING
         description: "MSL visit count: COUNT(*) WHERE ENGAGEMENT_TYPE = 'MSL Visit'"
         sourceColumn: ENGAGEMENT_TYPE
-        sourceTable: STG_HCP_ENGAGEMENTS
+        sourceTable: HCP_ENGAGEMENTS
       WEBINAR_ATTENDANCES:
         type: STRING
         description: "Webinar attendances: COUNT(*) WHERE ENGAGEMENT_TYPE = 'Webinar'"
         sourceColumn: ENGAGEMENT_TYPE
-        sourceTable: STG_HCP_ENGAGEMENTS
+        sourceTable: HCP_ENGAGEMENTS
       EMAIL_INTERACTIONS:
         type: STRING
         description: "Email interactions: COUNT(*) WHERE ENGAGEMENT_TYPE = 'Email'"
         sourceColumn: ENGAGEMENT_TYPE
-        sourceTable: STG_HCP_ENGAGEMENTS
+        sourceTable: HCP_ENGAGEMENTS
       CONFERENCE_PARTICIPATIONS:
         type: STRING
         description: "Conference participations: COUNT(*) WHERE ENGAGEMENT_TYPE =
           'Conference'"
         sourceColumn: ENGAGEMENT_TYPE
-        sourceTable: STG_HCP_ENGAGEMENTS
+        sourceTable: HCP_ENGAGEMENTS
       ADVISORY_BOARD_PARTICIPATIONS:
         type: STRING
         description: "Advisory board participations: COUNT(*) WHERE ENGAGEMENT_TYPE =
           'Advisory Board'"
         sourceColumn: ENGAGEMENT_TYPE
-        sourceTable: STG_HCP_ENGAGEMENTS
+        sourceTable: HCP_ENGAGEMENTS
       AE_REPORTS_FILED:
         type: STRING
         description: "AE reports filed via engagement: COUNT(*) WHERE ENGAGEMENT_TYPE =
           'AE Report'"
         sourceColumn: ENGAGEMENT_TYPE
-        sourceTable: STG_HCP_ENGAGEMENTS
+        sourceTable: HCP_ENGAGEMENTS
       POSITIVE_SENTIMENT_RATE_PCT:
         type: STRING
         description: "Positive sentiment rate: COUNT(SENTIMENT='Positive') /
@@ -351,7 +339,7 @@ productState:
         type: STRING
         description: "Most recent engagement date: MAX(ENGAGEMENT_DATE)"
         sourceColumn: ENGAGEMENT_DATE
-        sourceTable: STG_HCP_ENGAGEMENTS
+        sourceTable: HCP_ENGAGEMENTS
       DAYS_SINCE_LAST_ENGAGEMENT:
         type: STRING
         description: "Days since last engagement: DATEDIFF('day', MAX(ENGAGEMENT_DATE),
@@ -362,72 +350,72 @@ productState:
         type: STRING
         description: Recommended next best action for the HCP
         sourceColumn: RECOMMENDED_ACTION
-        sourceTable: STG_HCP_NEXT_BEST_ACTION
+        sourceTable: HCP_NEXT_BEST_ACTION
       NBA_CATEGORY:
         type: STRING
         description: Action category (e.g., Medical Affairs, Digital Outreach)
         sourceColumn: ACTION_CATEGORY
-        sourceTable: STG_HCP_NEXT_BEST_ACTION
+        sourceTable: HCP_NEXT_BEST_ACTION
       NBA_PRIORITY:
         type: STRING
         description: Action priority level (High, Medium, Low)
         sourceColumn: PRIORITY
-        sourceTable: STG_HCP_NEXT_BEST_ACTION
+        sourceTable: HCP_NEXT_BEST_ACTION
       NBA_INTENT_SIGNAL:
         type: STRING
         description: Behavioral intent signal triggering the recommendation
         sourceColumn: INTENT_SIGNAL
-        sourceTable: STG_HCP_NEXT_BEST_ACTION
+        sourceTable: HCP_NEXT_BEST_ACTION
       NBA_CONFIDENCE_SCORE:
         type: STRING
         description: ML model confidence score for the recommendation (0-1)
         sourceColumn: CONFIDENCE_SCORE
-        sourceTable: STG_HCP_NEXT_BEST_ACTION
+        sourceTable: HCP_NEXT_BEST_ACTION
       NBA_OWNER:
         type: STRING
         description: Person responsible for executing the recommended action
         sourceColumn: ASSIGNED_TO
-        sourceTable: STG_HCP_NEXT_BEST_ACTION
+        sourceTable: HCP_NEXT_BEST_ACTION
       NBA_DUE_DATE:
         type: STRING
         description: Due date for completing the recommended action
         sourceColumn: DUE_DATE
-        sourceTable: STG_HCP_NEXT_BEST_ACTION
+        sourceTable: HCP_NEXT_BEST_ACTION
       NBA_STATUS:
         type: STRING
         description: Execution status (Pending, In Progress, Completed)
         sourceColumn: STATUS
-        sourceTable: STG_HCP_NEXT_BEST_ACTION
+        sourceTable: HCP_NEXT_BEST_ACTION
       REGULATORY_BODY:
         type: STRING
         description: Regulatory authority for the product (e.g., FDA, EMA)
         sourceColumn: REGULATORY_BODY
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       APPROVAL_STATUS:
         type: STRING
         description: Current regulatory approval status
         sourceColumn: STATUS
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       APPROVAL_DATE:
         type: STRING
         description: Date the product received market approval
         sourceColumn: ACTUAL_APPROVAL_DATE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       REFERENCE_BIOLOGIC:
         type: STRING
         description: Name of the originator/reference biologic product
         sourceColumn: REFERENCE_BIOLOGIC
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       SUBMISSION_TYPE:
         type: STRING
         description: Type of regulatory filing (e.g., BLA/ANDA, MAA)
         sourceColumn: SUBMISSION_TYPE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       PATENT_EXPIRY_DATE:
         type: STRING
         description: Patent expiry date of the reference biologic
         sourceColumn: PATENT_EXPIRY_DATE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       INTERCHANGEABILITY_DESIGNATED:
         type: STRING
         description: "Boolean flag: product has interchangeability designation from
@@ -450,44 +438,44 @@ productState:
         description: "Total pharmacovigilance cases for the product: COUNT(DISTINCT
           CASE_ID)"
         sourceColumn: CASE_ID
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       PV_SERIOUS_CASES:
         type: STRING
         description: "Serious PV cases: COUNT(*) WHERE SERIOUSNESS = 'Serious'"
         sourceColumn: SERIOUSNESS
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       PV_ICSR_STATUS:
         type: STRING
         description: Latest ICSR submission status for the product
         sourceColumn: STATUS
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       PV_E2B_COMPLIANT:
         type: STRING
         description: Whether latest ICSR is E2B compliant (true/false)
         sourceColumn: E2B_COMPLIANT
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       PV_PSUR_STATUS:
         type: STRING
         description: Latest PSUR status for the product
         sourceColumn: STATUS
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
       PV_BENEFIT_RISK_CONCLUSION:
         type: STRING
         description: Overall benefit-risk assessment conclusion from latest PSUR
         sourceColumn: BENEFIT_RISK_CONCLUSION
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
       PV_PSUR_TOTAL_CASES:
         type: STRING
         description: Total cases included in the latest PSUR
         sourceColumn: TOTAL_CASES
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
       PV_AVG_DAYS_TO_SUBMIT:
         type: STRING
         description: "Average days to submit ICSR: AVG(SUBMISSION_DATE - RECEIPT_DATE)"
         sourceColumn: Calculated Column
         sourceTable: Calculated Column
   stateStoreType: loadDataIceberg
-  isProfilingEnabled: false
+  isProfilingEnabled: true
   updateStrategy: Overwrite
   tableName: iceberg_meta.HCP_360
   warehousePath: s3a://dataverse/testbed_load/
@@ -505,27 +493,118 @@ transformation:
   - isDynamic: true
     alias: Transform
     description: Transforming Data of Healthcare Professional 360
-    sequence: 10
+    sequence: 9
     inputDataFrameList:
-      - inputDataFrame: Hcp_Next_Best_Action_1
-        tempViewName: TBL1
-      - inputDataFrame: SAFETY_CASES_1
-        tempViewName: TBL2
-      - inputDataFrame: SALES_DATA_1
-        tempViewName: TBL3
-      - inputDataFrame: Hcp_Master_1
-        tempViewName: TBL4
-      - inputDataFrame: Hcp_Engagements_1
-        tempViewName: TBL5
-      - inputDataFrame: REGULATORY_SUBMISSIONS_1
-        tempViewName: TBL6
-      - inputDataFrame: MARKET_ACCESS_1
-        tempViewName: TBL7
       - inputDataFrame: Pharma_Covigilance_and_Patient_Safety_Product_1
-        tempViewName: TBL8
-      - inputDataFrame: HCP_Lookup_Tbl_1
-        tempViewName: TBL9
-    query: select * from TBL9
+        tempViewName: Pharma_Covigilance
+      - inputDataFrame: Hcp_Next_Best_Action_1
+        tempViewName: HCP_NEXT_BEST_ACTION
+      - inputDataFrame: Safety_Cases_1
+        tempViewName: SAFETY_CASES
+      - inputDataFrame: Sales_Data_1
+        tempViewName: SALES_DATA
+      - inputDataFrame: Hcp_Master_1
+        tempViewName: HCP_MASTER
+      - inputDataFrame: Hcp_Engagements_1
+        tempViewName: HCP_ENGAGEMENTS
+      - inputDataFrame: Regulatory_Submissions_1
+        tempViewName: REGULATORY_SUBMISSIONS
+      - inputDataFrame: Market_Access_1
+        tempViewName: MARKET_ACCESS
+    query: WITH prescribing_behavior AS ( SELECT sc.PRODUCT_NAME,
+      sc.COUNTRY_OF_OCCURRENCE AS COUNTRY, COUNT(DISTINCT sc.CASE_ID) AS
+      TOTAL_AE_CASES_REPORTED, SUM(CASE WHEN sc.SERIOUSNESS = 'Serious' THEN 1
+      ELSE 0 END) AS SERIOUS_AE_COUNT, SUM(CASE WHEN sc.SERIOUSNESS =
+      'Non-Serious' THEN 1 ELSE 0 END) AS NON_SERIOUS_AE_COUNT, SUM(CASE WHEN
+      sc.CAUSALITY_ASSESSMENT = 'Probable' THEN 1 ELSE 0 END) AS
+      PROBABLE_CAUSALITY_COUNT FROM SAFETY_CASES sc WHERE sc.REPORTER_TYPE =
+      'HCP' GROUP BY sc.PRODUCT_NAME, sc.COUNTRY_OF_OCCURRENCE ), commercial_rx
+      AS ( SELECT sd.PRODUCT_NAME, sd.COUNTRY, sd.THERAPEUTIC_AREA, sd.CHANNEL,
+      SUM(sd.QUANTITY) AS TOTAL_UNITS_SOLD, SUM(sd.REVENUE_USD) AS
+      TOTAL_REVENUE_USD, AVG(sd.NET_PRICE_USD) AS AVG_NET_PRICE_USD,
+      COUNT(DISTINCT sd.PAYER_TYPE) AS PAYER_DIVERSITY, MAX(sd.FORMULARY_STATUS)
+      AS FORMULARY_STATUS FROM SALES_DATA sd GROUP BY sd.PRODUCT_NAME,
+      sd.COUNTRY, sd.THERAPEUTIC_AREA, sd.CHANNEL ), market_coverage AS ( SELECT
+      ma.PRODUCT_NAME, ma.COUNTRY, ma.PAYER_NAME, ma.PAYER_TYPE,
+      ma.COVERAGE_STATUS, ma.FORMULARY_TIER, ma.REIMBURSEMENT_RATE,
+      ma.HTA_OUTCOME, ma.PRICE_PER_UNIT_USD AS LIST_PRICE_USD FROM MARKET_ACCESS
+      ma ), engagement_summary AS ( SELECT eng.HCP_ID, eng.PRODUCT_NAME,
+      COUNT(DISTINCT eng.ENGAGEMENT_ID) AS TOTAL_ENGAGEMENTS, SUM(CASE WHEN
+      eng.ENGAGEMENT_TYPE = 'MSL Visit' THEN 1 ELSE 0 END) AS MSL_VISITS,
+      SUM(CASE WHEN eng.ENGAGEMENT_TYPE = 'Webinar' THEN 1 ELSE 0 END) AS
+      WEBINAR_ATTENDANCES, SUM(CASE WHEN eng.ENGAGEMENT_TYPE = 'Email Campaign'
+      THEN 1 ELSE 0 END) AS EMAIL_INTERACTIONS, SUM(CASE WHEN
+      eng.ENGAGEMENT_TYPE = 'Conference' THEN 1 ELSE 0 END) AS
+      CONFERENCE_PARTICIPATIONS, SUM(CASE WHEN eng.ENGAGEMENT_TYPE = 'Advisory
+      Board' THEN 1 ELSE 0 END) AS ADVISORY_BOARD_PARTICIPATIONS, SUM(CASE WHEN
+      eng.ENGAGEMENT_TYPE = 'AE Report' THEN 1 ELSE 0 END) AS AE_REPORTS_FILED,
+      ROUND( SUM(CASE WHEN eng.SENTIMENT = 'Positive' THEN 1 ELSE 0 END) * 100.0
+      / CASE WHEN COUNT(DISTINCT eng.ENGAGEMENT_ID) = 0 THEN NULL ELSE
+      COUNT(DISTINCT eng.ENGAGEMENT_ID) END , 2) AS POSITIVE_SENTIMENT_RATE_PCT,
+      MAX(eng.ENGAGEMENT_DATE) AS LAST_ENGAGEMENT_DATE FROM HCP_ENGAGEMENTS eng
+      GROUP BY eng.HCP_ID, eng.PRODUCT_NAME ), nba_latest AS ( SELECT * FROM (
+      SELECT nba.HCP_ID, nba.PRODUCT_NAME, nba.RECOMMENDED_ACTION AS
+      NBA_RECOMMENDED_ACTION, nba.ACTION_CATEGORY AS NBA_CATEGORY, nba.PRIORITY
+      AS NBA_PRIORITY, nba.INTENT_SIGNAL AS NBA_INTENT_SIGNAL,
+      nba.CONFIDENCE_SCORE AS NBA_CONFIDENCE_SCORE, nba.ASSIGNED_TO AS
+      NBA_OWNER, nba.DUE_DATE AS NBA_DUE_DATE, nba.STATUS AS NBA_STATUS,
+      ROW_NUMBER() OVER (PARTITION BY nba.HCP_ID, nba.PRODUCT_NAME ORDER BY
+      nba.CONFIDENCE_SCORE DESC) AS RN FROM HCP_NEXT_BEST_ACTION nba ) t WHERE
+      RN = 1 ), regulatory_flags AS ( SELECT rs.PRODUCT_NAME, rs.BRAND_NAME,
+      rs.COUNTRY, rs.REGULATORY_BODY, rs.STATUS AS APPROVAL_STATUS,
+      rs.SUBMISSION_TYPE, COALESCE(rs.ACTUAL_APPROVAL_DATE,
+      rs.TARGET_APPROVAL_DATE) AS APPROVAL_DATE, rs.REFERENCE_BIOLOGIC,
+      rs.PATENT_EXPIRY_DATE, CASE WHEN rs.SUBMISSION_TYPE IN ('BLA/ANDA') AND
+      rs.STATUS = 'Approved' THEN TRUE ELSE FALSE END AS
+      INTERCHANGEABILITY_DESIGNATED, CASE WHEN rs.STATUS = 'Approved' AND
+      months_between(current_date(), rs.ACTUAL_APPROVAL_DATE) <= 6 THEN TRUE
+      ELSE FALSE END AS RECENT_APPROVAL_FLAG FROM REGULATORY_SUBMISSIONS rs ),
+      pv_cross_domain AS ( SELECT pv.PRODUCT_NAME, pv.COUNTRY_OF_OCCURRENCE,
+      COUNT(DISTINCT pv.CASE_ID) AS PV_TOTAL_CASES, SUM(CASE WHEN pv.SERIOUSNESS
+      = 'Serious' THEN 1 ELSE 0 END) AS PV_SERIOUS_CASES, MAX(pv.ICSR_STATUS) AS
+      PV_ICSR_STATUS, MAX(pv.E2B_COMPLIANT) AS PV_E2B_COMPLIANT,
+      MAX(pv.PSUR_STATUS) AS PV_PSUR_STATUS, MAX(pv.BENEFIT_RISK_CONCLUSION) AS
+      PV_BENEFIT_RISK_CONCLUSION, MAX(pv.PSUR_TOTAL_CASES) AS
+      PV_PSUR_TOTAL_CASES, AVG(pv.DAYS_TO_SUBMIT) AS PV_AVG_DAYS_TO_SUBMIT FROM
+      Pharma_Covigilance pv GROUP BY pv.PRODUCT_NAME, pv.COUNTRY_OF_OCCURRENCE )
+      SELECT HCP.HCP_ID, HCP.HCP_NAME, HCP.SPECIALTY, HCP.SUB_SPECIALTY,
+      HCP.PRACTICE_SETTING, HCP.AFFILIATION, HCP.TERRITORY, HCP.REGION,
+      HCP.COUNTRY, HCP.KOL_TIER, HCP.PRESCRIBER_SEGMENT, HCP.NPI_NUMBER,
+      HCP.YEARS_IN_PRACTICE, HCP.PRIMARY_THERAPEUTIC_AREA,
+      HCP.BIOSIMILAR_ADOPTION_SCORE, crx.PRODUCT_NAME, crx.THERAPEUTIC_AREA,
+      crx.CHANNEL, crx.TOTAL_UNITS_SOLD, crx.TOTAL_REVENUE_USD,
+      crx.AVG_NET_PRICE_USD, crx.PAYER_DIVERSITY, crx.FORMULARY_STATUS,
+      mc.PAYER_NAME, mc.PAYER_TYPE, mc.COVERAGE_STATUS, mc.FORMULARY_TIER,
+      mc.REIMBURSEMENT_RATE, mc.HTA_OUTCOME, mc.LIST_PRICE_USD,
+      ROUND((crx.AVG_NET_PRICE_USD - mc.LIST_PRICE_USD) * 100.0 / CASE WHEN
+      mc.LIST_PRICE_USD = 0 THEN NULL ELSE mc.LIST_PRICE_USD END, 2) AS
+      PRICE_DISCOUNT_PCT, pb.TOTAL_AE_CASES_REPORTED, pb.SERIOUS_AE_COUNT,
+      pb.NON_SERIOUS_AE_COUNT, pb.PROBABLE_CAUSALITY_COUNT,
+      es.TOTAL_ENGAGEMENTS, es.MSL_VISITS, es.WEBINAR_ATTENDANCES,
+      es.EMAIL_INTERACTIONS, es.CONFERENCE_PARTICIPATIONS,
+      es.ADVISORY_BOARD_PARTICIPATIONS, es.AE_REPORTS_FILED,
+      es.POSITIVE_SENTIMENT_RATE_PCT, es.LAST_ENGAGEMENT_DATE,
+      datediff(current_date(), es.LAST_ENGAGEMENT_DATE) AS
+      DAYS_SINCE_LAST_ENGAGEMENT, nba.NBA_RECOMMENDED_ACTION, nba.NBA_CATEGORY,
+      nba.NBA_PRIORITY, nba.NBA_INTENT_SIGNAL, nba.NBA_CONFIDENCE_SCORE,
+      nba.NBA_OWNER, nba.NBA_DUE_DATE, nba.NBA_STATUS, rf.REGULATORY_BODY,
+      rf.APPROVAL_STATUS, rf.SUBMISSION_TYPE, rf.APPROVAL_DATE,
+      rf.REFERENCE_BIOLOGIC, rf.PATENT_EXPIRY_DATE, rf.RECENT_APPROVAL_FLAG,
+      CASE WHEN rf.INTERCHANGEABILITY_DESIGNATED = TRUE AND hcp.KOL_TIER IN
+      ('Tier 1','Tier 2') THEN TRUE ELSE FALSE END AS TARGETED_OUTREACH_FLAG,
+      pvd.PV_TOTAL_CASES, pvd.PV_SERIOUS_CASES, pvd.PV_ICSR_STATUS,
+      pvd.PV_E2B_COMPLIANT, pvd.PV_PSUR_STATUS, pvd.PV_BENEFIT_RISK_CONCLUSION,
+      pvd.PV_PSUR_TOTAL_CASES, pvd.PV_AVG_DAYS_TO_SUBMIT FROM HCP_MASTER hcp
+      LEFT JOIN engagement_summary es ON hcp.HCP_ID = es.HCP_ID LEFT JOIN
+      commercial_rx crx ON hcp.PRIMARY_THERAPEUTIC_AREA = crx.THERAPEUTIC_AREA
+      AND hcp.COUNTRY = crx.COUNTRY LEFT JOIN market_coverage mc ON
+      crx.PRODUCT_NAME = mc.PRODUCT_NAME AND crx.COUNTRY = mc.COUNTRY LEFT JOIN
+      prescribing_behavior pb ON crx.PRODUCT_NAME = pb.PRODUCT_NAME AND
+      crx.COUNTRY = pb.COUNTRY LEFT JOIN nba_latest nba ON hcp.HCP_ID =
+      nba.HCP_ID AND es.PRODUCT_NAME = nba.PRODUCT_NAME LEFT JOIN
+      regulatory_flags rf ON crx.PRODUCT_NAME = rf.PRODUCT_NAME AND crx.COUNTRY
+      = rf.COUNTRY LEFT JOIN pv_cross_domain pvd ON crx.PRODUCT_NAME =
+      pvd.PRODUCT_NAME AND hcp.COUNTRY = pvd.COUNTRY_OF_OCCURRENCE
     optional:
       persistDataFrame: false
       loggingOptions:
