@@ -2,36 +2,12 @@ jobId: "1086"
 jobName: Biosimilar Clinical And Regulatory Intelligence Product
 jobType: Source Aligned Data Product
 developerId: 42825798-b98f-41c3-954a-c0722b747faf
-domain: lifesciences
+domain: research
 alias: loading_Biosimilar_Clinical_And_Regulatory_Intelligence_Product_data_in_iceberg
 discoveryPort:
   name: Biosimilar Clinical And Regulatory Intelligence Product
 inputPorts:
-  - alias: CLINICAL_TRIALS_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_CLINICAL_TRIALS.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:07bb4e8d-ab93-4be1-ac35-7cc02a613574
-    type: inputDelimited
-  - alias: REGULATORY_SUBMISSIONS_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_REGULATORY_SUBMISSIONS.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:9c650f0f-b879-417e-bc4f-0f015a07ebf8
-    type: inputDelimited
-  - alias: SAFETY_SIGNALS_1
+  - alias: Safety_Signals_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_SAFETY_SIGNALS.csv
     optional:
@@ -43,9 +19,9 @@ inputPorts:
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:8edd0785-ba33-48d2-9f3a-602462054495
     type: inputDelimited
-  - alias: Regulatory_Intelligence_LKP_TBL_1
+  - alias: Clinical_Trials_1
     isDynamic: true
-    path: s3a://dataverse/testbed/bioc/DP_BIO_001_BIOSIMILAR_REGULATORY_INTEL.csv
+    path: s3a://dataverse/testbed/bioc/STG_CLINICAL_TRIALS.csv
     optional:
       persistDataFrame: false
       advanceOptions:
@@ -53,7 +29,19 @@ inputPorts:
       enableDataReconciliation: false
       enforceSchema: false
       connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:b0f6c05f-166d-4b61-8973-8a8c83788826
+      dataSetUrn: urn:dv:dataset:07bb4e8d-ab93-4be1-ac35-7cc02a613574
+    type: inputDelimited
+  - alias: Regulatory_Submissions_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/STG_REGULATORY_SUBMISSIONS.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:9c650f0f-b879-417e-bc4f-0f015a07ebf8
     type: inputDelimited
 productState:
   isDynamic: true
@@ -65,121 +53,121 @@ productState:
         type: STRING
         description: Name of the biosimilar product under clinical development
         sourceColumn: PRODUCT_NAME
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       THERAPEUTIC_AREA:
         type: STRING
         description: Therapeutic area of the product (e.g., Immunology, Oncology)
         sourceColumn: THERAPEUTIC_AREA
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       TRIAL_ID:
         type: STRING
         description: Unique identifier for the clinical trial
         sourceColumn: TRIAL_ID
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       TRIAL_NAME:
         type: STRING
         description: Descriptive name of the clinical trial
         sourceColumn: TRIAL_NAME
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       PHASE:
         type: STRING
         description: Clinical trial phase (e.g., Phase I, Phase II, Phase III)
         sourceColumn: PHASE
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       TRIAL_STATUS:
         type: STRING
         description: Current status of the trial (Active, Completed, etc.)
         sourceColumn: STATUS
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       ENROLLMENT_TARGET:
         type: STRING
         description: Planned number of patients to enroll in the trial
         sourceColumn: ENROLLMENT_TARGET
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       ENROLLMENT_ACTUAL:
         type: STRING
         description: Actual number of patients enrolled to date
         sourceColumn: ENROLLMENT_ACTUAL
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       ENROLLMENT_RATE_PCT:
         type: STRING
         description: "Calculated enrollment rate: ROUND(ENROLLMENT_ACTUAL * 100.0 /
           NULLIF(ENROLLMENT_TARGET, 0), 2)"
         sourceColumn: DERIVED
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       COUNTRY:
         type: STRING
         description: Country where the clinical trial is conducted
         sourceColumn: COUNTRY
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       REGULATORY_BODY:
         type: STRING
         description: Regulatory authority overseeing the trial (e.g., FDA, EMA)
         sourceColumn: REGULATORY_BODY
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       SUBMISSION_ID:
         type: STRING
         description: Unique identifier for the regulatory submission
         sourceColumn: SUBMISSION_ID
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       SUBMISSION_TYPE:
         type: STRING
         description: Type of regulatory filing (e.g., BLA/ANDA, MAA, WHO PQ)
         sourceColumn: SUBMISSION_TYPE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       SUBMISSION_DATE:
         type: STRING
         description: Date the regulatory submission was filed
         sourceColumn: SUBMISSION_DATE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       TARGET_APPROVAL_DATE:
         type: STRING
         description: Expected date of regulatory approval
         sourceColumn: TARGET_APPROVAL_DATE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       ACTUAL_APPROVAL_DATE:
         type: STRING
         description: Actual date regulatory approval was granted (NULL if pending)
         sourceColumn: ACTUAL_APPROVAL_DATE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       SUBMISSION_STATUS:
         type: STRING
         description: Current status of the submission (Approved, Under Review, Submitted)
         sourceColumn: STATUS
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       DAYS_SINCE_SUBMISSION:
         type: STRING
         description: "Calculated days elapsed: DATEDIFF('day', SUBMISSION_DATE,
           CURRENT_DATE())"
         sourceColumn: DERIVED
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       SIGNAL_ID:
         type: STRING
         description: Unique identifier for the safety signal
         sourceColumn: SIGNAL_ID
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: SAFETY_SIGNALS
       SIGNAL_TYPE:
         type: STRING
         description: Type of safety signal (e.g., Disproportionality, Post-Market)
         sourceColumn: SIGNAL_TYPE
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: SAFETY_SIGNALS
       SIGNAL_SEVERITY:
         type: STRING
         description: Severity level of the signal (High, Medium, Low)
         sourceColumn: SEVERITY
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: SAFETY_SIGNALS
       SIGNAL_STATUS:
         type: STRING
         description: Current status of the signal (Open, Closed, Under Investigation)
         sourceColumn: STATUS
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: SAFETY_SIGNALS
       SIGNAL_DETECTION_DATE:
         type: STRING
         description: Date the safety signal was first detected
         sourceColumn: DETECTION_DATE
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: SAFETY_SIGNALS
   stateStoreType: loadDataIceberg
-  isProfilingEnabled: false
+  isProfilingEnabled: true
   updateStrategy: Overwrite
   tableName: iceberg_meta.Biosimilar_Clinical_And_Regulatory_Intelligence_Product
   warehousePath: s3a://dataverse/testbed_load/
@@ -196,22 +184,31 @@ transformation:
   - isDynamic: true
     alias: Transformation
     description: Transform Data Biosimilar Clinical And Regulatory Intelligence Product
-    sequence: 5
+    sequence: 4
     inputDataFrameList:
-      - inputDataFrame: CLINICAL_TRIALS_1
-        tempViewName: TBL1
-      - inputDataFrame: REGULATORY_SUBMISSIONS_1
-        tempViewName: TBL2
-      - inputDataFrame: SAFETY_SIGNALS_1
-        tempViewName: TBL3
-      - inputDataFrame: Regulatory_Intelligence_LKP_TBL_1
-        tempViewName: TBL4
-    query: SELECT PRODUCT_NAME, THERAPEUTIC_AREA, TRIAL_ID, TRIAL_NAME, PHASE,
-      TRIAL_STATUS, ENROLLMENT_TARGET, ENROLLMENT_ACTUAL, ENROLLMENT_RATE_PCT,
-      COUNTRY, REGULATORY_BODY, SUBMISSION_ID, SUBMISSION_TYPE, SUBMISSION_DATE,
-      TARGET_APPROVAL_DATE, ACTUAL_APPROVAL_DATE, SUBMISSION_STATUS,
-      DAYS_SINCE_SUBMISSION, SIGNAL_ID, SIGNAL_TYPE, SIGNAL_SEVERITY,
-      SIGNAL_STATUS, SIGNAL_DETECTION_DATE FROM TBL4
+      - inputDataFrame: Safety_Signals_1
+        tempViewName: SAFETY_SIGNALS
+      - inputDataFrame: Regulatory_Submissions_1
+        tempViewName: REGULATORY_SUBMISSIONS
+      - inputDataFrame: Clinical_Trials_1
+        tempViewName: CLINICAL_TRIALS
+    query: SELECT ct.PRODUCT_NAME, rs.BRAND_NAME, rs.REFERENCE_BIOLOGIC,
+      ct.THERAPEUTIC_AREA, ct.TRIAL_ID, ct.TRIAL_NAME, ct.PHASE, ct.STATUS AS
+      TRIAL_STATUS, ct.ENROLLMENT_TARGET, ct.ENROLLMENT_ACTUAL, ROUND( CASE WHEN
+      ct.ENROLLMENT_TARGET = 0 THEN NULL ELSE (ct.ENROLLMENT_ACTUAL * 100.0) /
+      ct.ENROLLMENT_TARGET END, 2 ) AS ENROLLMENT_RATE_PCT, ct.COUNTRY,
+      ct.REGULATORY_BODY AS REGULATORY_AUTHORITY, rs.SUBMISSION_ID,
+      rs.SUBMISSION_TYPE, rs.SUBMISSION_DATE, rs.TARGET_APPROVAL_DATE,
+      rs.ACTUAL_APPROVAL_DATE, rs.STATUS AS APPROVAL_STATUS,
+      COALESCE(rs.ACTUAL_APPROVAL_DATE, rs.TARGET_APPROVAL_DATE) AS
+      APPROVAL_DATE, datediff( COALESCE(rs.ACTUAL_APPROVAL_DATE,
+      current_date()), rs.SUBMISSION_DATE ) AS DAYS_SINCE_SUBMISSION,
+      rs.POST_APPROVAL_COMMITMENTS, rs.PATENT_EXPIRY_DATE, ss.SIGNAL_ID,
+      ss.SIGNAL_TYPE, ss.SEVERITY AS SIGNAL_SEVERITY, ss.STATUS AS
+      SIGNAL_STATUS, ss.DETECTION_DATE AS SIGNAL_DETECTION_DATE FROM
+      CLINICAL_TRIALS ct LEFT JOIN REGULATORY_SUBMISSIONS rs ON ct.PRODUCT_NAME
+      = rs.PRODUCT_NAME LEFT JOIN SAFETY_SIGNALS ss ON ct.PRODUCT_NAME =
+      ss.PRODUCT_NAME
     optional:
       persistDataFrame: false
     type: operationThroughSqlQuery
