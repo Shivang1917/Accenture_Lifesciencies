@@ -437,7 +437,24 @@ controlPort:
     NullValueCheck:
       productState:
         checks:
-          - column: Product_Name
+          - column: AVG_YIELD_PCT
+          - column: AVG_OEE_PCT
+        referenceAlias: Load_Batch_Yield_Analytics_or_Optimization_data_in_iceberg
+    NullCombinationCheck:
+      productState:
+        checks:
+          - columns:
+              - TOTAL_BATCHES
+            expression: <=
+            number: 5
+          - columns:
+              - AVG_YIELD_PCT
+            expression: <
+            number: 25
+          - columns:
+              - AVG_OEE_PCT
+            expression: <
+            number: 25
         referenceAlias: Load_Batch_Yield_Analytics_or_Optimization_data_in_iceberg
     UniquenessCheck:
       productState:
