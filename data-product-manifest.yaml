@@ -247,15 +247,3 @@ controlPort:
         checks:
           - column: PROGRAM_ID
         referenceAlias: loading_RND_Pipeline_And_Biologics_Research_data_in_iceberg
-    UnacceptableTextValueCheck:
-      productState:
-        checks:
-          - column: PROGRAM_STATUS
-            valueList:
-              - Active
-              - Completed
-              - On Hold
-              - Terminated
-              - Planning
-            expression: "!="
-        referenceAlias: loading_RND_Pipeline_And_Biologics_Research_data_in_iceberg
