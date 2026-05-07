@@ -2,36 +2,12 @@ jobId: "1090"
 jobName: Pharma Covigilance and Patient Safety Product
 jobType: Source Aligned Data Product
 developerId: 42825798-b98f-41c3-954a-c0722b747faf
-domain: lifesciences
+domain: market_quality
 alias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
 discoveryPort:
   name: Pharma Covigilance and Patient Safety Product
 inputPorts:
-  - alias: SAFETY_CASES_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_SAFETY_CASES.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:1e8e13d2-eb36-4f42-8db8-5eb7d8afbeaa
-    type: inputDelimited
-  - alias: ICSR_REPORTS_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_ICSR_REPORTS.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:88be9a6d-2065-4c19-870e-9a5a3940eb83
-    type: inputDelimited
-  - alias: PSUR_REPORTS_1
+  - alias: Psur_Reports_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_PSUR_REPORTS.csv
     optional:
@@ -43,9 +19,9 @@ inputPorts:
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:b0274ab3-651e-470e-a5c7-c9ba6464902b
     type: inputDelimited
-  - alias: ICSR_LKP_TBL_1
+  - alias: Icsr_Reports_1
     isDynamic: true
-    path: s3a://dataverse/testbed/bioc/DP_PV_005_PHARMACOVIGILANCE.csv
+    path: s3a://dataverse/testbed/bioc/STG_ICSR_REPORTS.csv
     optional:
       persistDataFrame: false
       advanceOptions:
@@ -53,7 +29,19 @@ inputPorts:
       enableDataReconciliation: false
       enforceSchema: false
       connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:35348628-02be-430d-adf2-e64d6f51ec49
+      dataSetUrn: urn:dv:dataset:88be9a6d-2065-4c19-870e-9a5a3940eb83
+    type: inputDelimited
+  - alias: Safety_Cases_1
+    isDynamic: true
+    path: s3a://dataverse/testbed/bioc/STG_SAFETY_CASES.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:1e8e13d2-eb36-4f42-8db8-5eb7d8afbeaa
     type: inputDelimited
 productState:
   isDynamic: true
@@ -65,129 +53,129 @@ productState:
         type: STRING
         description: Unique identifier for the adverse event safety case
         sourceColumn: CASE_ID
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       CASE_NUMBER:
         type: STRING
         description: Business reference number for the safety case (e.g., BIO-2025-00001)
         sourceColumn: CASE_NUMBER
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       PRODUCT_NAME:
         type: STRING
         description: Name of the product associated with the adverse event
         sourceColumn: PRODUCT_NAME
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       EVENT_TYPE:
         type: STRING
         description: Type of safety event (e.g., Adverse Event, Medication Error)
         sourceColumn: EVENT_TYPE
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       SERIOUSNESS:
         type: STRING
         description: Seriousness classification (Serious, Non-Serious)
         sourceColumn: SERIOUSNESS
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       SERIOUSNESS_CRITERIA:
         type: STRING
         description: Specific seriousness criteria (e.g., Hospitalization, Life Threatening)
         sourceColumn: SERIOUSNESS_CRITERIA
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       OUTCOME:
         type: STRING
         description: Patient outcome (e.g., Recovered, Recovering, Fatal)
         sourceColumn: OUTCOME
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       REPORTER_TYPE:
         type: STRING
         description: Type of reporter (e.g., HCP, Consumer, Regulatory Authority)
         sourceColumn: REPORTER_TYPE
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       COUNTRY_OF_OCCURRENCE:
         type: STRING
         description: Country where the adverse event occurred
         sourceColumn: COUNTRY_OF_OCCURRENCE
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       RECEIPT_DATE:
         type: STRING
         description: Date the safety case was received
         sourceColumn: RECEIPT_DATE
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       ONSET_DATE:
         type: STRING
         description: Date of adverse event onset
         sourceColumn: ONSET_DATE
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       REPORT_TYPE:
         type: STRING
         description: Type of report (e.g., Spontaneous, Clinical Trial, Literature)
         sourceColumn: REPORT_TYPE
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       CAUSALITY_ASSESSMENT:
         type: STRING
         description: Causality determination (e.g., Possible, Probable, Unlikely)
         sourceColumn: CAUSALITY_ASSESSMENT
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       MED_DRA_PT:
         type: STRING
         description: MedDRA Preferred Term for the adverse event (e.g., Cardiotoxicity)
         sourceColumn: MED_DRA_PT
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       MED_DRA_SOC:
         type: STRING
         description: MedDRA System Organ Class (e.g., Cardiac disorders, Nervous system
           disorders)
         sourceColumn: MED_DRA_SOC
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       PATIENT_AGE:
         type: STRING
         description: Age of the patient at time of adverse event
         sourceColumn: PATIENT_AGE
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       PATIENT_GENDER:
         type: STRING
         description: Gender of the patient (Male, Female)
         sourceColumn: PATIENT_GENDER
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       E2B_VERSION:
         type: STRING
         description: E2B electronic transmission format version (e.g., R3)
         sourceColumn: E2B_VERSION
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: SAFETY_CASES
       ICSR_ID:
         type: STRING
         description: Unique identifier for the Individual Case Safety Report
         sourceColumn: ICSR_ID
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       ICSR_DESTINATION:
         type: STRING
         description: Regulatory destination for ICSR submission (e.g., FAERS,
           EudraVigilance)
         sourceColumn: DESTINATION
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       ICSR_SUBMISSION_DATE:
         type: STRING
         description: Date the ICSR was submitted to the regulatory authority
         sourceColumn: SUBMISSION_DATE
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       ICSR_DUE_DATE:
         type: STRING
         description: Regulatory deadline for ICSR submission
         sourceColumn: DUE_DATE
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       ICSR_STATUS:
         type: STRING
         description: Current status of ICSR submission (Submitted, Pending, Overdue)
         sourceColumn: STATUS
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       E2B_COMPLIANT:
         type: STRING
         description: Whether the ICSR meets E2B compliance standards (true/false)
         sourceColumn: E2B_COMPLIANT
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       EXPEDITED:
         type: STRING
         description: Whether the report was submitted as an expedited report (true/false)
         sourceColumn: EXPEDITED
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: ICSR_REPORTS
       DAYS_TO_SUBMIT:
         type: STRING
         description: "Derived days to submit: DATEDIFF('day', RECEIPT_DATE,
@@ -198,34 +186,34 @@ productState:
         type: STRING
         description: Unique identifier for the Periodic Safety Update Report
         sourceColumn: PSUR_ID
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
       PSUR_TYPE:
         type: STRING
         description: Type of periodic report (e.g., PSUR/PBRER, DSUR)
         sourceColumn: REPORT_TYPE
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
       PSUR_STATUS:
         type: STRING
         description: Current status of the PSUR (Submitted, In Preparation, Planned)
         sourceColumn: STATUS
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
       PSUR_TOTAL_CASES:
         type: STRING
         description: Total number of safety cases included in the PSUR
         sourceColumn: TOTAL_CASES
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
       PSUR_SERIOUS_CASES:
         type: STRING
         description: Number of serious cases included in the PSUR
         sourceColumn: SERIOUS_CASES
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
       BENEFIT_RISK_CONCLUSION:
         type: STRING
         description: Overall benefit-risk assessment conclusion from the PSUR
         sourceColumn: BENEFIT_RISK_CONCLUSION
-        sourceTable: STG_PSUR_REPORTS
+        sourceTable: PSUR_REPORTS
   stateStoreType: loadDataIceberg
-  isProfilingEnabled: false
+  isProfilingEnabled: true
   updateStrategy: Overwrite
   tableName: iceberg_meta.Pharma_Covigilance_and_Patient_Safety_Product
   warehousePath: s3a://dataverse/testbed_load/
@@ -244,23 +232,28 @@ transformation:
   - isDynamic: true
     alias: Transform
     description: Transform Data for Pharma Covigilance and Patient Safety Product
-    sequence: 5
+    sequence: 4
     inputDataFrameList:
-      - inputDataFrame: ICSR_REPORTS_1
-        tempViewName: TBL1
-      - inputDataFrame: SAFETY_CASES_1
-        tempViewName: TBL2
-      - inputDataFrame: PSUR_REPORTS_1
-        tempViewName: TBL3
-      - inputDataFrame: ICSR_LKP_TBL_1
-        tempViewName: TBL4
-    query: SELECT CASE_ID, CASE_NUMBER, PRODUCT_NAME, EVENT_TYPE, SERIOUSNESS,
-      SERIOUSNESS_CRITERIA, OUTCOME, REPORTER_TYPE, COUNTRY_OF_OCCURRENCE,
-      RECEIPT_DATE, ONSET_DATE, REPORT_TYPE, CAUSALITY_ASSESSMENT, MED_DRA_PT,
-      MED_DRA_SOC, PATIENT_AGE, PATIENT_GENDER, E2B_VERSION, ICSR_ID,
-      ICSR_DESTINATION, ICSR_SUBMISSION_DATE, ICSR_DUE_DATE, ICSR_STATUS,
-      E2B_COMPLIANT, EXPEDITED, DAYS_TO_SUBMIT, PSUR_ID, PSUR_TYPE, PSUR_STATUS,
-      PSUR_TOTAL_CASES, PSUR_SERIOUS_CASES, BENEFIT_RISK_CONCLUSION FROM TBL4;
+      - inputDataFrame: Icsr_Reports_1
+        tempViewName: ICSR_REPORTS
+      - inputDataFrame: Psur_Reports_1
+        tempViewName: PSUR_REPORTS
+      - inputDataFrame: Safety_Cases_1
+        tempViewName: SAFETY_CASES
+    query: " SELECT sc.CASE_ID, sc.CASE_NUMBER, sc.PRODUCT_NAME, sc.EVENT_TYPE,
+      sc.SERIOUSNESS, sc.SERIOUSNESS_CRITERIA, sc.OUTCOME, sc.REPORTER_TYPE,
+      sc.COUNTRY_OF_OCCURRENCE, sc.RECEIPT_DATE, sc.ONSET_DATE, sc.REPORT_TYPE,
+      sc.CAUSALITY_ASSESSMENT, sc.MED_DRA_PT, sc.MED_DRA_SOC, sc.PATIENT_AGE,
+      sc.PATIENT_GENDER, sc.E2B_VERSION, icsr.ICSR_ID, icsr.DESTINATION AS
+      ICSR_DESTINATION, icsr.SUBMISSION_DATE AS ICSR_SUBMISSION_DATE,
+      icsr.DUE_DATE AS ICSR_DUE_DATE, icsr.STATUS AS ICSR_STATUS,
+      icsr.E2B_COMPLIANT, icsr.EXPEDITED, datediff(icsr.SUBMISSION_DATE,
+      sc.RECEIPT_DATE) AS DAYS_TO_SUBMIT, psur.PSUR_ID, psur.REPORT_TYPE AS
+      PSUR_TYPE, psur.STATUS AS PSUR_STATUS, psur.TOTAL_CASES AS
+      PSUR_TOTAL_CASES, psur.SERIOUS_CASES AS PSUR_SERIOUS_CASES,
+      psur.BENEFIT_RISK_CONCLUSION FROM SAFETY_CASES sc LEFT JOIN ICSR_REPORTS
+      icsr ON sc.CASE_ID = icsr.CASE_ID LEFT JOIN PSUR_REPORTS psur ON
+      sc.PRODUCT_NAME = psur.PRODUCT_NAME"
     optional:
       persistDataFrame: false
       loggingOptions:
