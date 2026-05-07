@@ -260,4 +260,14 @@ transformation:
         printSchema: true
     type: operationThroughSqlQuery
 controlPort:
-  dataQualityRules: {}
+  dataQualityRules:
+    NullValueCheck:
+      productState:
+        checks:
+          - column: PSUR_ID
+        referenceAlias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
+    UniquenessCheck:
+      productState:
+        checks:
+          - column: PSUR_ID
+        referenceAlias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
