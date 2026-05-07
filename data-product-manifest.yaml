@@ -214,7 +214,21 @@ controlPort:
     NullValueCheck:
       productState:
         checks:
-          - column: SALE_ID
+          - column: REVENUE_USD
+          - column: MARKET
+          - column: SALE_DATE
+        referenceAlias: Load_Global_Commercial_Market_Access_data_in_iceberg
+    NullCombinationCheck:
+      productState:
+        checks:
+          - columns:
+              - DISCOUNT_PERCENT
+            expression: ">"
+            number: 10
+          - columns:
+              - REBATE_PERCENT
+            expression: <
+            number: 0
         referenceAlias: Load_Global_Commercial_Market_Access_data_in_iceberg
     UniquenessCheck:
       productState:
