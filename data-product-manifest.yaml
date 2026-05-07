@@ -2,36 +2,12 @@ jobId: "1095"
 jobName: "Batch Yield Analytics Or Optimization "
 jobType: Aggregated Data Product
 developerId: 42825798-b98f-41c3-954a-c0722b747faf
-domain: lifesciences
+domain: manufacturing
 alias: Load_Batch_Yield_Analytics_or_Optimization_data_in_iceberg
 discoveryPort:
   name: "Batch Yield Analytics Or Optimization "
 inputPorts:
-  - alias: EQUIPMENT_OEE_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_EQUIPMENT_OEE.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:452415c4-37df-4d2d-810e-63e39404a8bf
-    type: inputDelimited
-  - alias: QUALITY_EVENTS_1
-    isDynamic: true
-    path: s3a://dataverse/testbed/bioc/STG_QUALITY_EVENTS.csv
-    optional:
-      persistDataFrame: false
-      advanceOptions:
-        delimiter: ","
-      enableDataReconciliation: false
-      enforceSchema: false
-      connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:ad7cb93d-993c-4e88-a634-33a0601bc691
-    type: inputDelimited
-  - alias: BATCH_RECORDS_1
+  - alias: Batch_Records_1
     isDynamic: true
     path: s3a://dataverse/testbed/bioc/STG_BATCH_RECORDS.csv
     optional:
@@ -43,9 +19,9 @@ inputPorts:
       connection: S3 Connection - Lifesciences
       dataSetUrn: urn:dv:dataset:453478fb-09c5-4a24-8f00-ac121701fcb8
     type: inputDelimited
-  - alias: Yield_Lookup_TBL_1
+  - alias: Quality_Events_1
     isDynamic: true
-    path: s3a://dataverse/testbed/bioc/ADP_Batch_Yield_Analytics_or_Optimization.csv
+    path: s3a://dataverse/testbed/bioc/STG_QUALITY_EVENTS.csv
     optional:
       persistDataFrame: false
       advanceOptions:
@@ -53,11 +29,23 @@ inputPorts:
       enableDataReconciliation: false
       enforceSchema: false
       connection: S3 Connection - Lifesciences
-      dataSetUrn: urn:dv:dataset:2b077b3f-e8a5-4afe-b735-17932b4e1403
+      dataSetUrn: urn:dv:dataset:ad7cb93d-993c-4e88-a634-33a0601bc691
     type: inputDelimited
-  - alias: Biosimilar_Switching_Adoption_Analytics_1
+  - alias: Equipment_Oee_1
     isDynamic: true
-    dataProductUrn: urn:dv:dataproduct:f481287b-302c-445d-8ab4-9420d888a576
+    path: s3a://dataverse/testbed/bioc/STG_EQUIPMENT_OEE.csv
+    optional:
+      persistDataFrame: false
+      advanceOptions:
+        delimiter: ","
+      enableDataReconciliation: false
+      enforceSchema: false
+      connection: S3 Connection - Lifesciences
+      dataSetUrn: urn:dv:dataset:452415c4-37df-4d2d-810e-63e39404a8bf
+    type: inputDelimited
+  - alias: Biosimilar_Clinical_And_Regulatory_Intelligence_Product_1
+    isDynamic: true
+    dataProductUrn: urn:dv:dataproduct:b43efa75-7653-423f-a29e-e340021282a0
     filter: ""
     projection: ""
     optional:
@@ -73,74 +61,74 @@ productState:
         type: STRING
         description: Name of the manufactured product; primary aggregation dimension
         sourceColumn: PRODUCT_NAME
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       BRAND_NAME:
         type: STRING
         description: Commercial brand name of the biosimilar product
         sourceColumn: BRAND_NAME
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       THERAPEUTIC_AREA:
         type: STRING
         description: Therapeutic area of the product (e.g., Immunology, Oncology)
         sourceColumn: THERAPEUTIC_AREA
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       MANUFACTURING_SITE:
         type: STRING
         description: Facility location; secondary aggregation dimension for site-level
           benchmarking
         sourceColumn: MANUFACTURING_SITE
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       TOTAL_BATCHES:
         type: STRING
         description: "Total manufacturing batches: COUNT(DISTINCT BATCH_ID)"
         sourceColumn: BATCH_ID
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       RELEASED_BATCHES:
         type: STRING
         description: "Released batches: COUNT(DISTINCT BATCH_ID) WHERE STATUS = 'Released'"
         sourceColumn: STATUS
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       REJECTED_BATCHES:
         type: STRING
         description: "Rejected batches: COUNT(DISTINCT BATCH_ID) WHERE STATUS = 'Rejected'"
         sourceColumn: STATUS
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       IN_PRODUCTION_BATCHES:
         type: STRING
         description: "Batches currently in production: COUNT(DISTINCT BATCH_ID) WHERE
           STATUS = 'In Production'"
         sourceColumn: STATUS
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       AVG_YIELD_PCT:
         type: STRING
         description: "Average batch yield: AVG(YIELD_PERCENT)"
         sourceColumn: YIELD_PERCENT
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       MIN_YIELD_PCT:
         type: STRING
         description: "Minimum batch yield: MIN(YIELD_PERCENT)"
         sourceColumn: YIELD_PERCENT
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       MAX_YIELD_PCT:
         type: STRING
         description: "Maximum batch yield: MAX(YIELD_PERCENT)"
         sourceColumn: YIELD_PERCENT
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       TOTAL_OUTPUT_QUANTITY:
         type: STRING
         description: "Total production output: SUM(BATCH_SIZE)"
         sourceColumn: BATCH_SIZE
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       BATCH_SIZE_UOM:
         type: STRING
         description: Unit of measure for batch size (e.g., mg, L, IU)
         sourceColumn: BATCH_SIZE_UOM
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       TOTAL_DEVIATIONS:
         type: STRING
         description: "Total deviations across all batches: SUM(DEVIATION_COUNT)"
         sourceColumn: DEVIATION_COUNT
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       AVG_DEVIATIONS_PER_BATCH:
         type: STRING
         description: "Average deviations per batch: SUM(DEVIATION_COUNT) /
@@ -151,7 +139,7 @@ productState:
         type: STRING
         description: "GMP-compliant batches: SUM(GMP_COMPLIANT)"
         sourceColumn: GMP_COMPLIANT
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: BATCH_RECORDS
       AVG_CYCLE_TIME_DAYS:
         type: STRING
         description: "Average manufacturing cycle time: AVG(DATEDIFF('day', START_DATE,
@@ -179,27 +167,27 @@ productState:
         type: STRING
         description: "Average OEE: AVG(OEE_PERCENT)"
         sourceColumn: OEE_PERCENT
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       AVG_AVAILABILITY_PCT:
         type: STRING
         description: "Average equipment availability: AVG(AVAILABILITY_PERCENT)"
         sourceColumn: AVAILABILITY_PERCENT
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       AVG_PERFORMANCE_PCT:
         type: STRING
         description: "Average equipment performance: AVG(PERFORMANCE_PERCENT)"
         sourceColumn: PERFORMANCE_PERCENT
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       AVG_EQUIPMENT_QUALITY_PCT:
         type: STRING
         description: "Average equipment quality rate: AVG(QUALITY_PERCENT)"
         sourceColumn: QUALITY_PERCENT
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       PRODUCTION_DOWNTIME_HOURS:
         type: STRING
         description: "Total production downtime: SUM(DOWNTIME_HOURS)"
         sourceColumn: DOWNTIME_HOURS
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       AVG_DOWNTIME_HOURS_PER_EQUIPMENT:
         type: STRING
         description: "Average downtime per equipment: SUM(DOWNTIME_HOURS) /
@@ -210,25 +198,25 @@ productState:
         type: STRING
         description: "Total equipment count: COUNT(DISTINCT EQUIPMENT_ID)"
         sourceColumn: EQUIPMENT_ID
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       CORRECTIVE_MAINTENANCE_COUNT:
         type: STRING
         description: "Corrective maintenance events: COUNT(*) WHERE MAINTENANCE_TYPE =
           'Corrective'"
         sourceColumn: MAINTENANCE_TYPE
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       PREVENTIVE_MAINTENANCE_COUNT:
         type: STRING
         description: "Preventive maintenance events: COUNT(*) WHERE MAINTENANCE_TYPE =
           'Preventive'"
         sourceColumn: MAINTENANCE_TYPE
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       PREDICTIVE_MAINTENANCE_COUNT:
         type: STRING
         description: "Predictive maintenance events: COUNT(*) WHERE MAINTENANCE_TYPE =
           'Predictive'"
         sourceColumn: MAINTENANCE_TYPE
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: EQUIPMENT_OEE
       CAPACITY_UTILIZATION_PCT:
         type: STRING
         description: "Capacity utilization: (EFFECTIVE_OUTPUT_QUANTITY /
@@ -239,42 +227,42 @@ productState:
         type: STRING
         description: "Total quality events: COUNT(DISTINCT EVENT_ID)"
         sourceColumn: EVENT_ID
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: QUALITY_EVENTS
       MAJOR_EVENTS:
         type: STRING
         description: "Major quality events: COUNT(*) WHERE SEVERITY = 'Major'"
         sourceColumn: SEVERITY
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: QUALITY_EVENTS
       MINOR_EVENTS:
         type: STRING
         description: "Minor quality events: COUNT(*) WHERE SEVERITY = 'Minor'"
         sourceColumn: SEVERITY
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: QUALITY_EVENTS
       OOS_COUNT:
         type: STRING
         description: "Out-of-specification events: COUNT(*) WHERE EVENT_TYPE = 'OOS'"
         sourceColumn: EVENT_TYPE
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: QUALITY_EVENTS
       QUALITY_DEVIATION_COUNT:
         type: STRING
         description: "Quality deviation events: COUNT(*) WHERE EVENT_TYPE = 'Deviation'"
         sourceColumn: EVENT_TYPE
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: QUALITY_EVENTS
       OPEN_EVENTS:
         type: STRING
         description: "Open quality events: COUNT(*) WHERE STATUS = 'Open'"
         sourceColumn: STATUS
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: QUALITY_EVENTS
       CLOSED_EVENTS:
         type: STRING
         description: "Closed quality events: COUNT(*) WHERE STATUS = 'Closed'"
         sourceColumn: STATUS
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: QUALITY_EVENTS
       TOTAL_CAPAS:
         type: STRING
         description: "Total CAPAs: COUNT(DISTINCT CAPA_ID)"
         sourceColumn: CAPA_ID
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: QUALITY_EVENTS
       QUALITY_EVENT_CLOSURE_RATE_PCT:
         type: STRING
         description: "Quality event closure rate: COUNT(CLOSED_EVENTS) /
@@ -285,37 +273,37 @@ productState:
         type: STRING
         description: "Most advanced clinical trial phase for the product: MAX(PHASE)"
         sourceColumn: PHASE
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       BIO_TRIAL_STATUS:
         type: STRING
         description: Latest clinical trial status for the product
         sourceColumn: STATUS
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: CLINICAL_TRIALS
       REGULATORY_AUTHORITY:
         type: STRING
         description: Regulatory authority handling the approval (e.g., FDA, EMA)
         sourceColumn: REGULATORY_BODY
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       BIO_APPROVAL_STATUS:
         type: STRING
         description: Current regulatory approval status (Approved, Under Review, Submitted)
         sourceColumn: STATUS
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       BIO_APPROVAL_DATE:
         type: STRING
         description: Date the biosimilar received market approval
         sourceColumn: ACTUAL_APPROVAL_DATE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       REFERENCE_BIOLOGIC:
         type: STRING
         description: Name of the originator/reference biologic product
         sourceColumn: REFERENCE_BIOLOGIC
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       PATENT_EXPIRY_DATE:
         type: STRING
         description: Patent expiry date of the reference biologic
         sourceColumn: PATENT_EXPIRY_DATE
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: REGULATORY_SUBMISSIONS
       BIO_ENROLLMENT_RATE_PCT:
         type: STRING
         description: "Average enrollment rate: AVG(ENROLLMENT_ACTUAL * 100.0 /
@@ -326,14 +314,14 @@ productState:
         type: STRING
         description: Most recent safety signal severity level for the product
         sourceColumn: SEVERITY
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: SAFETY_SIGNALS
       LATEST_SIGNAL_STATUS:
         type: STRING
         description: Most recent safety signal status (Open, Closed, Under Investigation)
         sourceColumn: STATUS
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: SAFETY_SIGNALS
   stateStoreType: loadDataIceberg
-  isProfilingEnabled: false
+  isProfilingEnabled: true
   updateStrategy: Overwrite
   tableName: iceberg_meta.Batch_Yield_Analytics_Or_Optimization_1
   warehousePath: s3a://dataverse/testbed_load/
@@ -352,19 +340,93 @@ transformation:
   - isDynamic: true
     alias: Transform
     description: Transforming Batch Yield Analytics Or Optimization
-    sequence: 6
+    sequence: 5
     inputDataFrameList:
-      - inputDataFrame: EQUIPMENT_OEE_1
-        tempViewName: TBL1
-      - inputDataFrame: BATCH_RECORDS_1
-        tempViewName: TBL2
-      - inputDataFrame: QUALITY_EVENTS_1
-        tempViewName: TBL3
-      - inputDataFrame: Biosimilar_Switching_Adoption_Analytics_1
-        tempViewName: TBL4
-      - inputDataFrame: Yield_Lookup_TBL_1
-        tempViewName: TBL5
-    query: select * from TBL5
+      - inputDataFrame: Quality_Events_1
+        tempViewName: QUALITY_EVENTS
+      - inputDataFrame: Batch_Records_1
+        tempViewName: BATCH_RECORDS
+      - inputDataFrame: Equipment_Oee_1
+        tempViewName: EQUIPMENT_OEE
+      - inputDataFrame: Biosimilar_Clinical_And_Regulatory_Intelligence_Product_1
+        tempViewName: BIOSIMILAR_REGULATORY_INTEL
+    query: WITH batch_metrics AS ( SELECT br.PRODUCT_NAME, br.MANUFACTURING_SITE,
+      COUNT(DISTINCT br.BATCH_ID) AS TOTAL_BATCHES, SUM(CASE WHEN br.STATUS =
+      'Released' THEN 1 ELSE 0 END) AS RELEASED_BATCHES, SUM(CASE WHEN br.STATUS
+      = 'Rejected' THEN 1 ELSE 0 END) AS REJECTED_BATCHES, SUM(CASE WHEN
+      br.STATUS = 'In Production' THEN 1 ELSE 0 END) AS IN_PRODUCTION_BATCHES,
+      AVG(br.YIELD_PERCENT) AS AVG_YIELD_PCT, MIN(br.YIELD_PERCENT) AS
+      MIN_YIELD_PCT, MAX(br.YIELD_PERCENT) AS MAX_YIELD_PCT, SUM(br.BATCH_SIZE)
+      AS TOTAL_OUTPUT_QUANTITY, MAX(br.BATCH_SIZE_UOM) AS BATCH_SIZE_UOM,
+      SUM(br.DEVIATION_COUNT) AS TOTAL_DEVIATIONS, AVG(br.DEVIATION_COUNT) AS
+      AVG_DEVIATIONS_PER_BATCH, SUM(CASE WHEN br.GMP_COMPLIANT = 1 THEN 1 ELSE 0
+      END) AS GMP_COMPLIANT_BATCHES, AVG(datediff(br.END_DATE, br.START_DATE))
+      AS AVG_CYCLE_TIME_DAYS, ROUND( SUM(CASE WHEN br.STATUS = 'Released' THEN 1
+      ELSE 0 END) * 100.0 / CASE WHEN COUNT(DISTINCT br.BATCH_ID) = 0 THEN NULL
+      ELSE COUNT(DISTINCT br.BATCH_ID) END , 2) AS RIGHT_FIRST_TIME_PCT, ROUND(
+      SUM(CASE WHEN br.STATUS = 'Rejected' THEN 1 ELSE 0 END) * 100.0 / CASE
+      WHEN COUNT(DISTINCT br.BATCH_ID) = 0 THEN NULL ELSE COUNT(DISTINCT
+      br.BATCH_ID) END , 2) AS BATCH_REJECTION_PCT FROM BATCH_RECORDS br GROUP
+      BY br.PRODUCT_NAME, br.MANUFACTURING_SITE ), equipment_performance AS (
+      SELECT eo.MANUFACTURING_SITE, AVG(eo.OEE_PERCENT) AS AVG_OEE_PCT,
+      AVG(eo.AVAILABILITY_PERCENT) AS AVG_AVAILABILITY_PCT,
+      AVG(eo.PERFORMANCE_PERCENT) AS AVG_PERFORMANCE_PCT,
+      AVG(eo.QUALITY_PERCENT) AS AVG_EQUIPMENT_QUALITY_PCT,
+      SUM(eo.DOWNTIME_HOURS) AS TOTAL_DOWNTIME_HOURS, AVG(eo.DOWNTIME_HOURS) AS
+      AVG_DOWNTIME_HOURS_PER_EQUIPMENT, COUNT(DISTINCT eo.EQUIPMENT_ID) AS
+      TOTAL_EQUIPMENT_COUNT, SUM(CASE WHEN eo.MAINTENANCE_TYPE = 'Corrective'
+      THEN 1 ELSE 0 END) AS CORRECTIVE_MAINTENANCE_COUNT, SUM(CASE WHEN
+      eo.MAINTENANCE_TYPE = 'Preventive' THEN 1 ELSE 0 END) AS
+      PREVENTIVE_MAINTENANCE_COUNT, SUM(CASE WHEN eo.MAINTENANCE_TYPE =
+      'Predictive' THEN 1 ELSE 0 END) AS PREDICTIVE_MAINTENANCE_COUNT,
+      ROUND(AVG(eo.AVAILABILITY_PERCENT) * AVG(eo.PERFORMANCE_PERCENT) / 100, 2)
+      AS CAPACITY_UTILIZATION_PCT FROM EQUIPMENT_OEE eo GROUP BY
+      eo.MANUFACTURING_SITE ), quality_summary AS ( SELECT qe.PRODUCT_NAME,
+      qe.MANUFACTURING_SITE, COUNT(DISTINCT qe.EVENT_ID) AS
+      TOTAL_QUALITY_EVENTS, SUM(CASE WHEN qe.SEVERITY = 'Major' THEN 1 ELSE 0
+      END) AS MAJOR_EVENTS, SUM(CASE WHEN qe.SEVERITY = 'Minor' THEN 1 ELSE 0
+      END) AS MINOR_EVENTS, SUM(CASE WHEN qe.EVENT_TYPE = 'OOS' THEN 1 ELSE 0
+      END) AS OOS_COUNT, SUM(CASE WHEN qe.EVENT_TYPE = 'Deviation' THEN 1 ELSE 0
+      END) AS DEVIATION_COUNT, SUM(CASE WHEN qe.STATUS = 'Open' THEN 1 ELSE 0
+      END) AS OPEN_EVENTS, SUM(CASE WHEN qe.STATUS = 'Closed' THEN 1 ELSE 0 END)
+      AS CLOSED_EVENTS, COUNT(DISTINCT qe.CAPA_ID) AS TOTAL_CAPAS FROM
+      QUALITY_EVENTS qe GROUP BY qe.PRODUCT_NAME, qe.MANUFACTURING_SITE ),
+      bio_regulatory_cross AS ( SELECT * FROM ( SELECT bio.PRODUCT_NAME,
+      bio.BRAND_NAME, bio.THERAPEUTIC_AREA, bio.PHASE AS LATEST_TRIAL_PHASE,
+      bio.TRIAL_STATUS, bio.REGULATORY_AUTHORITY, bio.APPROVAL_STATUS,
+      bio.APPROVAL_DATE, bio.REFERENCE_BIOLOGIC, bio.PATENT_EXPIRY_DATE,
+      bio.ENROLLMENT_RATE_PCT, bio.SIGNAL_SEVERITY AS LATEST_SIGNAL_SEVERITY,
+      bio.SIGNAL_STATUS AS LATEST_SIGNAL_STATUS, ROW_NUMBER() OVER (PARTITION BY
+      bio.PRODUCT_NAME ORDER BY bio.APPROVAL_DATE DESC) AS RN FROM
+      BIOSIMILAR_REGULATORY_INTEL bio ) t WHERE RN = 1 ) SELECT bm.PRODUCT_NAME,
+      brc.BRAND_NAME, brc.THERAPEUTIC_AREA, bm.MANUFACTURING_SITE,
+      bm.TOTAL_BATCHES, bm.RELEASED_BATCHES, bm.REJECTED_BATCHES,
+      bm.IN_PRODUCTION_BATCHES, bm.AVG_YIELD_PCT, bm.MIN_YIELD_PCT,
+      bm.MAX_YIELD_PCT, bm.TOTAL_OUTPUT_QUANTITY, bm.BATCH_SIZE_UOM,
+      bm.TOTAL_DEVIATIONS, bm.AVG_DEVIATIONS_PER_BATCH,
+      bm.GMP_COMPLIANT_BATCHES, bm.AVG_CYCLE_TIME_DAYS, bm.RIGHT_FIRST_TIME_PCT,
+      bm.BATCH_REJECTION_PCT, ROUND(bm.TOTAL_OUTPUT_QUANTITY * bm.AVG_YIELD_PCT
+      / 100, 2) AS EFFECTIVE_OUTPUT_QUANTITY, ep.AVG_OEE_PCT,
+      ep.AVG_AVAILABILITY_PCT, ep.AVG_PERFORMANCE_PCT,
+      ep.AVG_EQUIPMENT_QUALITY_PCT, ep.TOTAL_DOWNTIME_HOURS AS
+      PRODUCTION_DOWNTIME_HOURS, ep.AVG_DOWNTIME_HOURS_PER_EQUIPMENT,
+      ep.TOTAL_EQUIPMENT_COUNT, ep.CORRECTIVE_MAINTENANCE_COUNT,
+      ep.PREVENTIVE_MAINTENANCE_COUNT, ep.PREDICTIVE_MAINTENANCE_COUNT,
+      ep.CAPACITY_UTILIZATION_PCT, qs.TOTAL_QUALITY_EVENTS, qs.MAJOR_EVENTS,
+      qs.MINOR_EVENTS, qs.OOS_COUNT, qs.DEVIATION_COUNT AS
+      QUALITY_DEVIATION_COUNT, qs.OPEN_EVENTS, qs.CLOSED_EVENTS, qs.TOTAL_CAPAS,
+      ROUND( qs.CLOSED_EVENTS * 100.0 / CASE WHEN qs.TOTAL_QUALITY_EVENTS = 0
+      THEN NULL ELSE qs.TOTAL_QUALITY_EVENTS END , 2) AS
+      QUALITY_EVENT_CLOSURE_RATE_PCT, brc.LATEST_TRIAL_PHASE, brc.TRIAL_STATUS
+      AS BIO_TRIAL_STATUS, brc.REGULATORY_AUTHORITY, brc.APPROVAL_STATUS AS
+      BIO_APPROVAL_STATUS, brc.APPROVAL_DATE AS BIO_APPROVAL_DATE,
+      brc.REFERENCE_BIOLOGIC, brc.PATENT_EXPIRY_DATE, brc.ENROLLMENT_RATE_PCT AS
+      BIO_ENROLLMENT_RATE_PCT, brc.LATEST_SIGNAL_SEVERITY,
+      brc.LATEST_SIGNAL_STATUS FROM batch_metrics bm LEFT JOIN
+      equipment_performance ep ON bm.MANUFACTURING_SITE = ep.MANUFACTURING_SITE
+      LEFT JOIN quality_summary qs ON bm.PRODUCT_NAME = qs.PRODUCT_NAME AND
+      bm.MANUFACTURING_SITE = qs.MANUFACTURING_SITE LEFT JOIN
+      bio_regulatory_cross brc ON bm.PRODUCT_NAME = brc.PRODUCT_NAME
     optional:
       persistDataFrame: false
       loggingOptions:
