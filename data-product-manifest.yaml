@@ -392,7 +392,16 @@ controlPort:
     NullValueCheck:
       productState:
         checks:
-          - column: Product_Name
+          - column: AVG_YIELD_PCT
+          - column: AVG_OEE_PCT
+        referenceAlias: loading_Biosimilar_Switching_Adoption_Analytics_data_in_iceberg
+    NullCombinationCheck:
+      productState:
+        checks:
+          - columns:
+              - TOTAL_BATCHES
+            expression: <=
+            number: 5
         referenceAlias: loading_Biosimilar_Switching_Adoption_Analytics_data_in_iceberg
     UniquenessCheck:
       productState:
