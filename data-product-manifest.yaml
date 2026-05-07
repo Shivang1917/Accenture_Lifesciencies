@@ -240,10 +240,31 @@ controlPort:
     NullValueCheck:
       productState:
         checks:
-          - column: BATCH_ID
+          - column: YIELD_PERCENT
+          - column: BATCH_STATUS
+        referenceAlias: loading_Global_Supply_Chain_And_Manufacturing_Quality_Data_in_iceberg
+    NullCombinationCheck:
+      productState:
+        checks:
+          - columns:
+              - YIELD_PERCENT
+            expression: <=
+            number: 25
         referenceAlias: loading_Global_Supply_Chain_And_Manufacturing_Quality_Data_in_iceberg
     UniquenessCheck:
       productState:
         checks:
           - column: BATCH_ID
+        referenceAlias: loading_Global_Supply_Chain_And_Manufacturing_Quality_Data_in_iceberg
+    UnacceptableTextValueCheck:
+      productState:
+        checks:
+          - column: BATCH_STATUS
+            valueList:
+              - Released
+              - Rejected
+              - In Production
+              - Quarantined
+              - Under Review
+            expression: "!="
         referenceAlias: loading_Global_Supply_Chain_And_Manufacturing_Quality_Data_in_iceberg
