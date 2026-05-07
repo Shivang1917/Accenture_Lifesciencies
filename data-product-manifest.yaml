@@ -63,216 +63,216 @@ productState:
         type: STRING
         description: "Total clinical trials: COUNT(DISTINCT TRIAL_ID)"
         sourceColumn: TRIAL_ID
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       ACTIVE_TRIALS:
         type: STRING
         description: "Active trials: COUNT(DISTINCT TRIAL_ID) WHERE STATUS = 'Active'"
         sourceColumn: STATUS
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       COMPLETED_TRIALS:
         type: STRING
         description: "Completed trials: COUNT(DISTINCT TRIAL_ID) WHERE STATUS = 'Completed'"
         sourceColumn: STATUS
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       AVG_ENROLLMENT_RATE:
         type: STRING
         description: "Average enrollment rate: AVG(ENROLLMENT_ACTUAL * 100.0 /
           NULLIF(ENROLLMENT_TARGET, 0))"
         sourceColumn: ENROLLMENT_ACTUAL, ENROLLMENT_TARGET
-        sourceTable: STG_CLINICAL_TRIALS
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       TOTAL_REG_SUBMISSIONS:
         type: STRING
         description: "Total regulatory submissions: COUNT(DISTINCT SUBMISSION_ID)"
         sourceColumn: SUBMISSION_ID
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       APPROVED_SUBMISSIONS:
         type: STRING
         description: "Approved submissions: COUNT(DISTINCT SUBMISSION_ID) WHERE STATUS =
           'Approved'"
         sourceColumn: STATUS
-        sourceTable: STG_REGULATORY_SUBMISSIONS
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       TOTAL_SAFETY_SIGNALS:
         type: STRING
         description: "Total safety signals: COUNT(DISTINCT SIGNAL_ID)"
         sourceColumn: SIGNAL_ID
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       HIGH_SEVERITY_SIGNALS:
         type: STRING
         description: "High severity signals: COUNT(DISTINCT SIGNAL_ID) WHERE SEVERITY =
           'High'"
         sourceColumn: SEVERITY
-        sourceTable: STG_SAFETY_SIGNALS
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       TOTAL_BATCHES:
         type: STRING
         description: "Total manufacturing batches: COUNT(DISTINCT BATCH_ID)"
         sourceColumn: BATCH_ID
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: GLOBAL_SUPPLY_CHAIN_AND_MANUFACTURING_QUALITY
       AVG_YIELD:
         type: STRING
         description: "Average manufacturing yield: AVG(YIELD_PERCENT)"
         sourceColumn: YIELD_PERCENT
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: GLOBAL_SUPPLY_CHAIN_AND_MANUFACTURING_QUALITY
       GMP_COMPLIANT_BATCHES:
         type: STRING
         description: "GMP-compliant batches: SUM(GMP_COMPLIANT)"
         sourceColumn: GMP_COMPLIANT
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: GLOBAL_SUPPLY_CHAIN_AND_MANUFACTURING_QUALITY
       TOTAL_DEVIATIONS:
         type: STRING
         description: "Total manufacturing deviations: SUM(DEVIATION_COUNT)"
         sourceColumn: DEVIATION_COUNT
-        sourceTable: STG_BATCH_RECORDS
+        sourceTable: GLOBAL_SUPPLY_CHAIN_AND_MANUFACTURING_QUALITY
       AVG_OEE:
         type: STRING
         description: "Average Overall Equipment Effectiveness: AVG(OEE_PERCENT)"
         sourceColumn: OEE_PERCENT
-        sourceTable: STG_EQUIPMENT_OEE
+        sourceTable: GLOBAL_SUPPLY_CHAIN_AND_MANUFACTURING_QUALITY
       TOTAL_QUALITY_EVENTS:
         type: STRING
         description: "Total quality events: COUNT(DISTINCT EVENT_ID)"
         sourceColumn: EVENT_ID
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: GLOBAL_SUPPLY_CHAIN_AND_MANUFACTURING_QUALITY
       MAJOR_QUALITY_EVENTS:
         type: STRING
         description: "Major quality events: COUNT(DISTINCT EVENT_ID) WHERE SEVERITY =
           'Major'"
         sourceColumn: SEVERITY
-        sourceTable: STG_QUALITY_EVENTS
+        sourceTable: GLOBAL_SUPPLY_CHAIN_AND_MANUFACTURING_QUALITY
       TOTAL_SALES_TRANSACTIONS:
         type: STRING
         description: "Total sales transactions: COUNT(DISTINCT SALE_ID)"
         sourceColumn: SALE_ID
-        sourceTable: STG_SALES_DATA
+        sourceTable: GLOBAL_COMMERCIAL_MARKET_ACCESS
       TOTAL_REVENUE_USD:
         type: STRING
         description: "Total gross revenue: SUM(REVENUE_USD)"
         sourceColumn: REVENUE_USD
-        sourceTable: STG_SALES_DATA
+        sourceTable: GLOBAL_COMMERCIAL_MARKET_ACCESS
       TOTAL_UNITS_SOLD:
         type: STRING
         description: "Total units sold: SUM(QUANTITY)"
         sourceColumn: QUANTITY
-        sourceTable: STG_SALES_DATA
+        sourceTable: GLOBAL_COMMERCIAL_MARKET_ACCESS
       AVG_NET_PRICE:
         type: STRING
         description: "Average net price per unit: AVG(NET_PRICE_USD)"
         sourceColumn: NET_PRICE_USD
-        sourceTable: STG_SALES_DATA
+        sourceTable: GLOBAL_COMMERCIAL_MARKET_ACCESS
       MARKETS_ACTIVE:
         type: STRING
         description: "Number of active markets: COUNT(DISTINCT MARKET)"
         sourceColumn: MARKET
-        sourceTable: STG_SALES_DATA
+        sourceTable: GLOBAL_COMMERCIAL_MARKET_ACCESS
       AVG_REIMBURSEMENT_RATE:
         type: STRING
         description: "Average payer reimbursement rate: AVG(REIMBURSEMENT_RATE)"
         sourceColumn: REIMBURSEMENT_RATE
-        sourceTable: STG_MARKET_ACCESS
+        sourceTable: GLOBAL_COMMERCIAL_MARKET_ACCESS
       AVG_DISCOUNT_PERCENT:
         type: STRING
         description: "Average contractual discount: AVG(DISCOUNT_PERCENT)"
         sourceColumn: DISCOUNT_PERCENT
-        sourceTable: STG_PAYER_CONTRACTS
+        sourceTable: GLOBAL_COMMERCIAL_MARKET_ACCESS
       TOTAL_NET_REVENUE:
         type: STRING
         description: "Total net revenue after discounts: SUM(REVENUE_USD (1 -
           DISCOUNT_PERCENT / 100))"
         sourceColumn: Calculated Column
-        sourceTable: Calculated Column
+        sourceTable: GLOBAL_COMMERCIAL_MARKET_ACCESS
       TOTAL_RND_PROGRAMS:
         type: STRING
         description: "Total R&D programs: COUNT(DISTINCT PROGRAM_ID)"
         sourceColumn: PROGRAM_ID
-        sourceTable: STG_RND_PIPELINE
+        sourceTable: RND_PIPELINE_AND_BIOLOGICS_RESEARCH
       RND_LATEST_PHASE:
         type: STRING
         description: "Most advanced development phase: MAX(PHASE)"
         sourceColumn: PHASE
-        sourceTable: STG_RND_PIPELINE
+        sourceTable: RND_PIPELINE_AND_BIOLOGICS_RESEARCH
       RND_TOTAL_BUDGET:
         type: STRING
         description: "Total allocated R&D budget: SUM(BUDGET_USD)"
         sourceColumn: BUDGET_USD
-        sourceTable: STG_RND_PIPELINE
+        sourceTable: RND_PIPELINE_AND_BIOLOGICS_RESEARCH
       RND_TOTAL_SPEND:
         type: STRING
         description: "Total R&D spend to date: SUM(SPEND_TO_DATE_USD)"
         sourceColumn: SPEND_TO_DATE_USD
-        sourceTable: STG_RND_PIPELINE
+        sourceTable: RND_PIPELINE_AND_BIOLOGICS_RESEARCH
       RND_BUDGET_UTILIZATION_PCT:
         type: STRING
         description: "R&D budget utilization: ROUND(SUM(SPEND_TO_DATE_USD) * 100.0 /
           NULLIF(SUM(BUDGET_USD), 0), 2)"
         sourceColumn: Calculated Column
-        sourceTable: Calculated Column
+        sourceTable: RND_PIPELINE_AND_BIOLOGICS_RESEARCH
       TOTAL_IND_FILINGS:
         type: STRING
         description: "Total IND/CTA filings: COUNT(DISTINCT FILING_ID)"
         sourceColumn: FILING_ID
-        sourceTable: STG_IND_FILINGS
+        sourceTable: RND_PIPELINE_AND_BIOLOGICS_RESEARCH
       CLINICAL_HOLDS:
         type: STRING
         description: "Filings under clinical hold: SUM(CLINICAL_HOLD)"
         sourceColumn: CLINICAL_HOLD
-        sourceTable: STG_IND_FILINGS
+        sourceTable: RND_PIPELINE_AND_BIOLOGICS_RESEARCH
       TOTAL_RESEARCH_EXPERIMENTS:
         type: STRING
         description: "Total translational research experiments: COUNT(DISTINCT RESEARCH_ID)"
         sourceColumn: RESEARCH_ID
-        sourceTable: STG_TRANSLATIONAL_RESEARCH
+        sourceTable: RND_PIPELINE_AND_BIOLOGICS_RESEARCH
       TOTAL_AE_CASES:
         type: STRING
         description: "Total adverse event cases: COUNT(DISTINCT CASE_ID)"
         sourceColumn: CASE_ID
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: PHARMA_COVIGILANCE_AND_PATIENT_SAFETY_PRODUCT
       SERIOUS_AE_CASES:
         type: STRING
         description: "Serious AE cases: COUNT(DISTINCT CASE_ID) WHERE SERIOUSNESS =
           'Serious'"
         sourceColumn: SERIOUSNESS
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: PHARMA_COVIGILANCE_AND_PATIENT_SAFETY_PRODUCT
       FATAL_AE_CASES:
         type: STRING
         description: "Fatal AE cases: COUNT(DISTINCT CASE_ID) WHERE OUTCOME = 'Fatal'"
         sourceColumn: OUTCOME
-        sourceTable: STG_SAFETY_CASES
+        sourceTable: PHARMA_COVIGILANCE_AND_PATIENT_SAFETY_PRODUCT
       TOTAL_ICSR_SUBMITTED:
         type: STRING
         description: "Total ICSRs submitted: COUNT(DISTINCT ICSR_ID)"
         sourceColumn: ICSR_ID
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: PHARMA_COVIGILANCE_AND_PATIENT_SAFETY_PRODUCT
       AVG_DAYS_TO_SUBMIT_ICSR:
         type: STRING
         description: "Average days to submit ICSR: AVG(SUBMISSION_DATE - RECEIPT_DATE)
           via STG_ICSR_REPORTS joined to STG_SAFETY_CASES"
         sourceColumn: Calculated Column
-        sourceTable: Calculated Column
+        sourceTable: PHARMA_COVIGILANCE_AND_PATIENT_SAFETY_PRODUCT
       EXPEDITED_REPORTS:
         type: STRING
         description: "Expedited ICSR submissions: SUM(EXPEDITED)"
         sourceColumn: EXPEDITED
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: PHARMA_COVIGILANCE_AND_PATIENT_SAFETY_PRODUCT
       E2B_COMPLIANT_REPORTS:
         type: STRING
         description: "E2B-compliant ICSR submissions: SUM(E2B_COMPLIANT)"
         sourceColumn: E2B_COMPLIANT
-        sourceTable: STG_ICSR_REPORTS
+        sourceTable: PHARMA_COVIGILANCE_AND_PATIENT_SAFETY_PRODUCT
       FRESHNESS_SLA:
         type: STRING
         description: "Data quality SLA: APPROVAL_STATUS last updated 4 hours"
         sourceColumn: Calculated Column
-        sourceTable: Calculated Column
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       COMPLETENESS_SLA:
         type: STRING
         description: "Data quality SLA: COUNT(APPROVAL_STATUS IS NOT NULL) / COUNT(*) 99%"
         sourceColumn: Calculated Column
-        sourceTable: Calculated Column
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
       REGULATORY_STATUS_SLA:
         type: STRING
         description: "Data quality SLA: COUNT(VALID REGULATORY + APPROVAL_STATUS) /
           COUNT(*) 99.9%"
         sourceColumn: Calculated Column
-        sourceTable: Calculated Column
+        sourceTable: BIOSIMILAR_CLINICAL_AND_REGULATORY_INTELLIGENCE_PRODUCT
   stateStoreType: loadDataIceberg
   isProfilingEnabled: true
   updateStrategy: Overwrite
