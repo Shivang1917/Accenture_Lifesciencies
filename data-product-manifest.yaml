@@ -264,10 +264,31 @@ controlPort:
     NullValueCheck:
       productState:
         checks:
-          - column: PSUR_ID
+          - column: CAUSALITY_ASSESSMENT
+          - column: EVENT_TYPE
+          - column: CASE_ID
+        referenceAlias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
+    NullCombinationCheck:
+      productState:
+        checks:
+          - columns:
+              - DAYS_TO_SUBMIT
+            expression: <=
+            number: 0
         referenceAlias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
     UniquenessCheck:
       productState:
         checks:
           - column: PSUR_ID
+        referenceAlias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
+    UnacceptableTextValueCheck:
+      productState:
+        checks:
+          - column: ICSR_STATUS
+            valueList:
+              - Submitted
+              - Pending
+              - Overdue
+              - Draft
+            expression: "!="
         referenceAlias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
