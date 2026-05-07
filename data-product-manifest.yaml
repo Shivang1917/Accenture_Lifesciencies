@@ -392,15 +392,16 @@ controlPort:
     NullValueCheck:
       productState:
         checks:
-          - column: AVG_YIELD_PCT
-          - column: AVG_OEE_PCT
+          - column: TOTAL_AE_CASES
+          - column: AVG_YIELD
+          - column: PRODUCT_NAME
         referenceAlias: loading_Biosimilar_Switching_Adoption_Analytics_data_in_iceberg
     NullCombinationCheck:
       productState:
         checks:
           - columns:
-              - TOTAL_BATCHES
-            expression: <=
+              - AVG_DISCOUNT_PERCENT
+            expression: ">"
             number: 5
         referenceAlias: loading_Biosimilar_Switching_Adoption_Analytics_data_in_iceberg
     UniquenessCheck:
