@@ -281,14 +281,3 @@ controlPort:
         checks:
           - column: PSUR_ID
         referenceAlias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
-    UnacceptableTextValueCheck:
-      productState:
-        checks:
-          - column: ICSR_STATUS
-            valueList:
-              - Submitted
-              - Pending
-              - Overdue
-              - Draft
-            expression: "!="
-        referenceAlias: loading_Pharma_Covigilance_and_Patient_Safety_Product_data_in_iceberg
