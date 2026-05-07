@@ -213,4 +213,18 @@ transformation:
       persistDataFrame: false
     type: operationThroughSqlQuery
 controlPort:
-  dataQualityRules: {}
+  dataQualityRules:
+    NullValueCheck:
+      productState:
+        checks:
+          - column: APPROVAL_STATUS
+          - column: Trial_Id
+        referenceAlias: loading_Biosimilar_Clinical_And_Regulatory_Intelligence_Product_data_in_iceberg
+    NullCombinationCheck:
+      productState:
+        checks:
+          - columns:
+              - ENROLLMENT_RATE_PCT
+            expression: <
+            number: 25
+        referenceAlias: loading_Biosimilar_Clinical_And_Regulatory_Intelligence_Product_data_in_iceberg
