@@ -615,7 +615,24 @@ controlPort:
     NullValueCheck:
       productState:
         checks:
-          - column: HCP_ID
+          - column: NPI_NUMBER
+          - column: SPECIALTY
+        referenceAlias: Load_Healthcare_Professional_360_data_in_iceberg
+    NullCombinationCheck:
+      productState:
+        checks:
+          - columns:
+              - REIMBURSEMENT_RATE
+            expression: <
+            number: 0
+          - columns:
+              - YEARS_IN_PRACTICE
+            expression: <=
+            number: 1
+          - columns:
+              - BIOSIMILAR_ADOPTION_SCORE
+            expression: <=
+            number: 0.1
         referenceAlias: Load_Healthcare_Professional_360_data_in_iceberg
     UniquenessCheck:
       productState:
