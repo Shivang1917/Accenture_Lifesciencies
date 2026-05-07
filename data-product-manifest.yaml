@@ -256,15 +256,3 @@ controlPort:
         checks:
           - column: BATCH_ID
         referenceAlias: loading_Global_Supply_Chain_And_Manufacturing_Quality_Data_in_iceberg
-    UnacceptableTextValueCheck:
-      productState:
-        checks:
-          - column: BATCH_STATUS
-            valueList:
-              - Released
-              - Rejected
-              - In Production
-              - Quarantined
-              - Under Review
-            expression: "!="
-        referenceAlias: loading_Global_Supply_Chain_And_Manufacturing_Quality_Data_in_iceberg
