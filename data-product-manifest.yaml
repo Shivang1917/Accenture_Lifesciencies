@@ -433,4 +433,14 @@ transformation:
         printSchema: true
     type: operationThroughSqlQuery
 controlPort:
-  dataQualityRules: {}
+  dataQualityRules:
+    NullValueCheck:
+      productState:
+        checks:
+          - column: Product_Name
+        referenceAlias: Load_Batch_Yield_Analytics_or_Optimization_data_in_iceberg
+    UniquenessCheck:
+      productState:
+        checks:
+          - column: Product_Name
+        referenceAlias: Load_Batch_Yield_Analytics_or_Optimization_data_in_iceberg
