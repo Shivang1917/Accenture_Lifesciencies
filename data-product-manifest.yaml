@@ -388,4 +388,14 @@ transformation:
         printSchema: true
     type: operationThroughSqlQuery
 controlPort:
-  dataQualityRules: {}
+  dataQualityRules:
+    NullValueCheck:
+      productState:
+        checks:
+          - column: Product_Name
+        referenceAlias: loading_Biosimilar_Switching_Adoption_Analytics_data_in_iceberg
+    UniquenessCheck:
+      productState:
+        checks:
+          - column: Product_Name
+        referenceAlias: loading_Biosimilar_Switching_Adoption_Analytics_data_in_iceberg
