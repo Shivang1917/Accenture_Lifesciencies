@@ -611,4 +611,14 @@ transformation:
         printSchema: true
     type: operationThroughSqlQuery
 controlPort:
-  dataQualityRules: {}
+  dataQualityRules:
+    NullValueCheck:
+      productState:
+        checks:
+          - column: HCP_ID
+        referenceAlias: Load_Healthcare_Professional_360_data_in_iceberg
+    UniquenessCheck:
+      productState:
+        checks:
+          - column: HCP_ID
+        referenceAlias: Load_Healthcare_Professional_360_data_in_iceberg
